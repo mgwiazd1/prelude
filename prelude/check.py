@@ -240,15 +240,25 @@ def check_token(conn, token, roster_path=None):
                              else ("snapshot" if a in snap_first else "none"))})
 
     n_sig = sum(1 for a in all_addrs if pop(a) == "signal")
-    # size floor (matches the delta engine thresholds): a lead claim with a
-    # sub-$1k first entry on either side is small-position — flagged, and
-    # never rendered as conviction-scale.
-    # `is not None`, not truthiness: a dust entry rounds to 0.0 and must pull
-    # the floor DOWN, never drop out and let the other side set it.
-    floors = [s["entry_usd"] for s in (sig_size, coh_size)
-              if s and s.get("entry_usd") is not None]
+    # size floor (matches the delta engine thresholds) judges the LEADING
+    # side's first entry — the claim is "the leader got in with $X". The
+    # trailing side is context only (2026-09-23: judging min(both) printed
+    # "small-position lead" for a >=$5k cohort leader over a dust signal).
+    # CONCURRENT has no leader: the smaller of the two (conservative).
+    # `is not None`, not truthiness: a dust entry rounds to 0.0 and must
+    # count as dust, never drop out and let the other side set the floor.
+    lead_side = {"SIGNAL_LEAD": "signal", "COHORT_LEAD": "cohort",
+                 "CONCURRENT": "both"}.get(verdict)
+    if lead_side == "both":
+        floors = [s["entry_usd"] for s in (sig_size, coh_size)
+                  if s and s.get("entry_usd") is not None]
+    elif lead_side:
+        s = sig_size if lead_side == "signal" else coh_size
+        floors = [s["entry_usd"]] if s and s.get("entry_usd") is not None else []
+    else:
+        floors = []
     size_floor = None
-    if floors and verdict in ("SIGNAL_LEAD", "COHORT_LEAD", "CONCURRENT"):
+    if floors:
         m = min(floors)
         size_floor = ("5k" if m >= 5000 else
                       ("1k" if m >= 1000 else f"sub-{m:,.0f}"))
@@ -265,7 +275,7 @@ def check_token(conn, token, roster_path=None):
         "lead_is_lower_bound": bool(lead_ok and (sig_cens or coh_cens)),
         "censored": {"signal": sig_cens, "cohort": coh_cens},
         "entry_size": {"signal": sig_size, "cohort": coh_size,
-                       "floor": size_floor},
+                       "floor": size_floor, "floor_side": lead_side},
         "entry": {
             "signal_first": {"ts": sig_ts, "source": sig_src},
             "cohort_first": {"ts": coh_ts, "source": coh_src},
@@ -304,6 +314,18 @@ def _peak(conn, holder, token_address, token_symbol):
     if row and row[0]:
         return row[0]
     return 0.0
+
+
+def _day(ts, empty="—"):
+    """Exact timestamp -> YYYY-MM-DD; a redacted ISO week ('2026-W31-Sat')
+    passes through whole (slicing it to 10 chars cut off the weekday)."""
+    if not ts:
+        return empty
+    return ts if "-W" in ts else ts[:10]
+
+
+def _band_or_usd(side):
+    return _usd(side["entry_usd"]) if side and side.get("entry_usd") is not None else "—"
 
 
 def _usd(v):
@@ -360,9 +382,9 @@ def render(res):
         else:
             lines.append("          (snapshot-order times are poller START, not entry)")
 
-    lines.append(f"entry   signal@{e['signal_first']['ts'][:10] if e['signal_first']['ts'] else '—'}"
+    lines.append(f"entry   signal@{_day(e['signal_first']['ts'])}"
                  f" ({_prov_word(e['signal_first']['source'], cens.get('signal'))})  "
-                 f"cohort@{e['cohort_first']['ts'][:10] if e['cohort_first']['ts'] else '—'}"
+                 f"cohort@{_day(e['cohort_first']['ts'])}"
                  f" ({_prov_word(e['cohort_first']['source'], cens.get('cohort'))})")
     sz = res.get("entry_size") or {}
     def _sz_word(s):
@@ -375,18 +397,23 @@ def render(res):
                  f"cohort: {_sz_word(sz.get('cohort'))}")
     fl = sz.get("floor")
     if fl is not None:
+        side = sz.get("floor_side")
+        if side in ("signal", "cohort"):
+            other = "cohort" if side == "signal" else "signal"
+            who = f"leading {side} first entry"
+            ctx = f" · trailing {other}: {_band_or_usd(sz.get(other))}"
+        else:
+            who, ctx = "smaller first entry (concurrent, no leader)", ""
         if fl == "5k":
-            lines.append("floor   entry size >= $5k on BOTH first entries "
-                         "[conviction-scale lead]")
+            lines.append(f"floor   {who} >= $5k [conviction-scale lead]{ctx}")
         elif fl == "1k":
-            lines.append("floor   entry size >= $1k, < $5k on BOTH first "
-                         "entries [small-scale lead — not conviction-scale]")
+            lines.append(f"floor   {who} >= $1k, < $5k [small-scale lead — "
+                         f"not conviction-scale]{ctx}")
         else:
             amt = fl.split('-', 1)[-1]
             amt = "under $1k" if amt == "1k" else f"${amt}"   # "sub-1k" = redacted
-            lines.append(f"floor   smallest first entry {amt} "
-                         "— SUB-$1K [small-position lead; "
-                         "stated small, not conviction-scale]")
+            lines.append(f"floor   {who} {amt} — SUB-$1K [small-position lead; "
+                         f"stated small, not conviction-scale]{ctx}")
     lines.append(f"n       {res['n_wallets_total_tracked']} tracked wallets "
                  f"({res['n_signal']} signal / {res['n_cohort']} cohort), "
                  f"{res['n_snapshots']} live snapshots")
@@ -400,7 +427,7 @@ def render(res):
     for t in res["top_holders"]:
         tag = "S" if t["signal"] else " "
         src = {"backfill": "bf", "snapshot": "snap", "none": "--"}[t["entry_source"]]
-        et = t["entry_ts"][:10] if t["entry_ts"] else ""
+        et = _day(t["entry_ts"], "")
         lines.append(f"  [{tag}] {t['wallet']:<22} {_usd(t['peak_usd']):>11}  "
                      f"entry@{src:<4} {et}")
     lines.append(f"prov    signal-entry={_prov_word(res['provenance']['signal'], cens.get('signal'))}"

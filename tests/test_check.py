@@ -162,7 +162,10 @@ def test_entry_size_printed_on_every_lead_verdict(tmp_path):
     res = check.check_token(conn, "SIGLD", roster_path=rpath)
     assert res["entry_size"]["signal"]["entry_usd"] == 5000.0
     assert res["entry_size"]["cohort"]["entry_usd"] == 2000.0
-    assert res["entry_size"]["floor"] == "1k"   # min side sets the floor
+    # the LEADING side sets the floor (signal led with $5,000; cohort $2,000
+    # trailed) — changed 2026-09-23 from min(both sides)
+    assert res["entry_size"]["floor"] == "5k"
+    assert res["entry_size"]["floor_side"] == "signal"
 
 
 def test_size_floor_sub_1k_stated_small(tmp_path):
@@ -257,7 +260,13 @@ def test_redact_coarsens_dates_and_sizes(tmp_path):
     out = check.render(red)
     assert not re.search(r"2026-\d\d-\d\d", out), out      # no exact days
     assert "$678" not in out and "$4,431" not in out       # no exact sizes
-    assert "2026-W31" in out and "$100-1k" in out and "$1k-5k" in out
+    assert "2026-W31-Sat" in out and "$100-1k" in out and "$1k-5k" in out
+    # generic: once the band labels are removed, no "$<digit>" may remain
+    rest = out
+    for b in ("<$100", "$100-1k", "$1k-5k", ">=$5k", "under $1k", ">= $5k", ">= $1k", "< $5k",
+              "SUB-$1K"):
+        rest = rest.replace(b, "")
+    assert not re.search(r"\$\d", rest), rest
     assert red["lead_hours"] == res["lead_hours"]           # the claim is kept
     raw = redact.redact_check(res, redact.Pseudonyms(str(tmp_path / "p.json")),
                               coarsen=False)
@@ -299,3 +308,24 @@ def test_tied_earliest_entry_is_deterministic_largest(tmp_path):
     res = check.check_token(conn, "TIE", roster_path=rpath)
     assert res["entry_size"]["cohort"]["address"] == C2
     assert res["entry_size"]["cohort"]["entry_usd"] == 43000.0
+
+
+def test_floor_judges_leader_never_small_when_leader_is_5k(tmp_path):
+    from prelude import redact
+    conn, rpath = _seed(tmp_path)
+    # cohort LEADS with $43k; signal trails with dust
+    _hist(conn, C1, "LEADBIG", "2026-08-03T23:59:59", 43000.0)
+    _hist(conn, S, "LEADBIG", "2026-08-08T23:59:59", 1.0)
+    # signal LEADS with $6k; cohort trails with dust
+    _hist(conn, S, "SIGBIG", "2026-08-03T23:59:59", 6000.0)
+    _hist(conn, C1, "SIGBIG", "2026-08-08T23:59:59", 0.5)
+    for tok, verdict, side in (("LEADBIG", "COHORT_LEAD", "cohort"),
+                               ("SIGBIG", "SIGNAL_LEAD", "signal")):
+        res = check.check_token(conn, tok, roster_path=rpath)
+        assert res["verdict"] == verdict
+        assert res["entry_size"]["floor"] == "5k" and res["entry_size"]["floor_side"] == side
+        for r in (res, redact.redact_check(res, redact.Pseudonyms(str(tmp_path / "p.json")))):
+            out = check.render(r)
+            fl = [l for l in out.splitlines() if l.startswith("floor")][0]
+            assert f"leading {side} first entry >= $5k [conviction-scale lead]" in fl
+            assert "small-position lead" not in out and "trailing" in fl

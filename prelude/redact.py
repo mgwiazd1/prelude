@@ -49,11 +49,14 @@ class Pseudonyms:
 
 
 def week(ts):
-    """'2026-06-25T23:59:59' -> '2026-W26' (ISO week)."""
+    """'2026-06-25T23:59:59' -> '2026-W26-Thu' (ISO week + weekday).
+    Weekday added so two entries in the same week beside "120h before" don't
+    read as an error; lead hours already imply the gap."""
     if not ts:
         return ts
-    y, w, _ = datetime.fromisoformat(ts[:10]).isocalendar()
-    return f"{y}-W{w:02d}"
+    d = datetime.fromisoformat(ts[:10])
+    y, w, _ = d.isocalendar()
+    return f"{y}-W{w:02d}-{d.strftime('%a')}"
 
 
 def band(usd):
