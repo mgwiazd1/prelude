@@ -75,8 +75,12 @@ def snapshot_all(client=None, conn=None, roster=None, ts=None, live_view=False):
         "INSERT INTO snapshots (ts, wallets) VALUES (?,?)", (ts, len(active)))
     snapshot_id = cur.lastrowid
     conn.commit()
-    print(f"[poller] gate={status} mode={mode} wallets={len(active)} "
-          f"snapshot_id={snapshot_id} ts={ts}")
+    if live_view:
+        print(f"[poller] budget gate ok: {status['today']}/{status['day_cap']} today, "
+              f"{status['week']}/{status['week_cap']} this week · {len(active)} wallets")
+    else:
+        print(f"[poller] gate={status} mode={mode} wallets={len(active)} "
+              f"snapshot_id={snapshot_id} ts={ts}")
     n = 0
     dead = []
     for w in active:
@@ -104,7 +108,7 @@ def snapshot_all(client=None, conn=None, roster=None, ts=None, live_view=False):
             print(f"  POST /api/v1/profiler/address/current-balance  "
                   f"{client.last_status}  {client.last_cost or '?'} credit  "
                   f"{len(rows):>3} rows  {w['chain']:<9} {_short(w['address'])}"
-                  f"  {client.last_ms}ms{top_s}")
+                  f"  {client.last_ms}ms{top_s or '  (verified empty)'}")
         for r in rows:
             conn.execute(
                 "INSERT OR REPLACE INTO balance_snapshots"
