@@ -369,7 +369,7 @@ def render(res):
         if not s:
             return "—"
         # peak is VALUE (moves with price), not position size
-        return (f"{s['wallet']} day1={_usd(s['entry_usd'])} "
+        return (f"{s['wallet']} day1 {_usd(s['entry_usd'])} "
                 f"(peak value {_usd(s['peak_usd'])})")
     lines.append(f"size    signal: {_sz_word(sz.get('signal'))}  "
                  f"cohort: {_sz_word(sz.get('cohort'))}")
