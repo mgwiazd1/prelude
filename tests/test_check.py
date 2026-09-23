@@ -213,3 +213,34 @@ def test_redact_removes_every_roster_name_and_address(tmp_path):
     # stable across instances: same address, same letter
     p1 = redact.Pseudonyms(str(tmp_path / "ps.json"))
     assert p1(S) == redact.Pseudonyms(str(tmp_path / "ps.json"))(S)
+
+
+def _cov(conn, *addrs):
+    for a in addrs:
+        conn.execute("INSERT OR REPLACE INTO backfill_runs (address, range_from, range_to,"
+                     " status) VALUES (?, '2026-06-25', '2026-09-23', 'done')", (a,))
+    conn.commit()
+
+
+def test_both_sides_censored_is_not_concurrent(tmp_path):
+    conn, rpath = _seed(tmp_path)
+    _cov(conn, S, C1)
+    _hist(conn, S, "OLDHELD", "2026-06-25T23:59:59", 500.0)
+    _hist(conn, C1, "OLDHELD", "2026-06-25T23:59:59", 700.0)
+    res = check.check_token(conn, "OLDHELD", roster_path=rpath)
+    assert res["verdict"] == "UNVERIFIED_ENTRY_TIMING"
+    assert res["lead_claim_valid"] is False
+    assert "entry order unknown" in check.render(res)
+
+
+def test_one_side_censored_lead_is_lower_bound(tmp_path):
+    conn, rpath = _seed(tmp_path)
+    _cov(conn, S, C1)
+    _hist(conn, C1, "HALF", "2026-06-25T23:59:59", 500.0)
+    _hist(conn, S, "HALF", "2026-08-18T23:59:59", 700.0)
+    res = check.check_token(conn, "HALF", roster_path=rpath)
+    assert res["verdict"] == "COHORT_LEAD" and res["lead_is_lower_bound"] is True
+    assert "cohort entered >=" in check.render(res)
+    # without coverage info (no backfill_runs row) nothing is censored
+    res2 = check.check_token(conn, "SIGLD", roster_path=rpath)
+    assert res2["lead_is_lower_bound"] is False

@@ -127,6 +127,24 @@ def check_token(conn, token, roster_path=None):
     sig_ts, sig_src = earliest("signal")
     coh_ts, coh_src = earliest("cohort")
 
+    # LEFT-CENSORING: a backfill first_seen on the wallet's coverage start day
+    # means "already held when history begins", not an entry. One censored
+    # side keeps the ORDER but the lead is only a lower bound; both censored
+    # = order unknown (was rendered CONCURRENT lead=0 — wrong, 2026-09-23).
+    try:
+        cov = dict(conn.execute("SELECT address, range_from FROM backfill_runs"))
+    except Exception:
+        cov = {}
+
+    def censored(popname, ts, src):
+        if src != "backfill" or not ts:
+            return False
+        return any(bf_first.get(a) == ts and cov.get(a) and ts[:10] <= cov[a]
+                   for a in all_addrs if pop(a) == popname)
+
+    sig_cens = censored("signal", sig_ts, sig_src)
+    coh_cens = censored("cohort", coh_ts, coh_src)
+
     # entry SIZE per side: the earliest-entry wallet's day-1 balance (lower
     # bound, daily resolution) + peak position (upper bound). Always printed
     # with the verdict — no lead claim renders without its magnitude.
@@ -173,6 +191,8 @@ def check_token(conn, token, roster_path=None):
         verdict, lead_hours, lead_ok = "COHORT_ONLY", None, False
     elif coh_ts is None:
         verdict, lead_hours, lead_ok = "SIGNAL_ONLY", None, False
+    elif sig_src == "backfill" and coh_src == "backfill" and sig_cens and coh_cens:
+        verdict, lead_hours, lead_ok = "UNVERIFIED_ENTRY_TIMING", None, False
     elif sig_src == "backfill" and coh_src == "backfill":
         dh = (_ts_to_dt(coh_ts) - _ts_to_dt(sig_ts)).total_seconds() / 3600.0
         lead_hours = round(dh, 1)
@@ -231,6 +251,9 @@ def check_token(conn, token, roster_path=None):
         "verdict": verdict,
         "lead_claim_valid": lead_ok,
         "lead_hours": lead_hours,
+        # one side held before history starts: order valid, lead is a minimum
+        "lead_is_lower_bound": bool(lead_ok and (sig_cens or coh_cens)),
+        "censored": {"signal": sig_cens, "cohort": coh_cens},
         "entry_size": {"signal": sig_size, "cohort": coh_size,
                        "floor": size_floor},
         "entry": {
@@ -290,11 +313,12 @@ def render(res):
     e = res["entry"]
     v = res["verdict"]
     lead = res.get("lead_hours")
+    ge = ">=" if res.get("lead_is_lower_bound") else ""
     if v == "SIGNAL_LEAD":
-        lines.append(f"verdict SIGNAL_LEAD — signal entered {lead}h before the "
+        lines.append(f"verdict SIGNAL_LEAD — signal entered {ge}{lead}h before the "
                      "tracked cohort  [LEAD CLAIM VALID]")
     elif v == "COHORT_LEAD":
-        lines.append(f"verdict COHORT_LEAD — cohort entered {abs(lead)}h before "
+        lines.append(f"verdict COHORT_LEAD — cohort entered {ge}{abs(lead)}h before "
                      "any signal wallet  [LEAD CLAIM VALID]")
     elif v == "CONCURRENT":
         lines.append(f"verdict CONCURRENT — signal and cohort entered within "
@@ -308,7 +332,11 @@ def render(res):
     else:  # UNVERIFIED_ENTRY_TIMING
         lines.append("verdict UNVERIFIED_ENTRY_TIMING — entry times not both "
                      "backfill-sourced; NO lead claim possible")
-        lines.append("          (snapshot-order times are poller START, not entry)")
+        if all((res.get("censored") or {}).values()):
+            lines.append("          (both sides already held when backfill history "
+                         "begins — entry order unknown)")
+        else:
+            lines.append("          (snapshot-order times are poller START, not entry)")
 
     lines.append(f"entry   signal@{e['signal_first']['ts'][:10] if e['signal_first']['ts'] else '—'}"
                  f" ({_prov_word(e['signal_first']['source'])})  "

@@ -40,7 +40,7 @@ shows which ones survive.**
    the example roster (`data/roster.example.json`: public exchange and
    public-figure addresses).
 
-3. **Tests** (41, no network): `make test`
+3. **Tests** (43, no network): `make test`
 
 ## The roster is private, on purpose
 
@@ -164,9 +164,15 @@ The same wallet spine runs on a different clock per chain:
   to past days is selection on outcome: a wallet can be labelled smart money
   *because* it was early.
 - **The roster follows as often as it leads.** Across 90 days, deduped by
-  token address, `check` gives **22 signal-first / 36 cohort-first / 14
-  concurrent**. None of the 22 signal-first entries was ≥ $1k. Nothing here
-  means "these wallets habitually lead".
+  token address, `check` gives **22 signal-first / 36 cohort-first / 12
+  concurrent** (as of Sep 23; the live poller adds data). None of the 22
+  signal-first entries was ≥ $1k. Nothing here means "these wallets
+  habitually lead".
+- **Left-censoring.** History starts Jun 25. A position already held that day
+  has an unknown entry date. If one side is censored, `check` prints the lead
+  as a minimum (`>=`). If both are, it refuses to order them
+  (`UNVERIFIED_ENTRY_TIMING`). The backtest starts onsets on Jul 3 for the same
+  reason.
 - **12h alert threshold.** This is deliberate conservatism, not a resolution
   limit.
 - **Missing history.** 4 of the 45 polled wallets returned no history, so
