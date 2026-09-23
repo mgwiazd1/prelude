@@ -20,7 +20,7 @@ CREDIT_COST = {
     "/api/v1/tgm/flow-intelligence": 1,
     "/api/v1/tgm/flows": 1,
     "/api/v1/tgm/who-bought-sold": 1,
-    "/api/v1/profiler/address-transactions": 1,
+    "/api/v1/profiler/address/transactions": 1,
     "/api/v1/profiler/address/related-wallets": 1,
     "/api/v1beta1/tgm/historical-who-bought-sold": 1,
     # backtest onset source (docs: backtesting-data/historical-token-screener,
@@ -215,7 +215,8 @@ class NansenClient:
         payload = {"address": address, "chain": chain, "context_note": context_note}
         if token_address:
             payload["token_address"] = token_address
-        return self._post("/api/v1/profiler/address-transactions", payload)
+        # path verified by 24x 200 in api_usage (the hyphenated form never ran)
+        return self._post("/api/v1/profiler/address/transactions", payload)
 
     def related_wallets(self, chain, address, context_note=None, records_per_page=50):
         # path confirmed live (operator-intel crosswallet.py): profiler/address/related-wallets

@@ -244,3 +244,21 @@ def test_one_side_censored_lead_is_lower_bound(tmp_path):
     # without coverage info (no backfill_runs row) nothing is censored
     res2 = check.check_token(conn, "SIGLD", roster_path=rpath)
     assert res2["lead_is_lower_bound"] is False
+
+
+def test_redact_coarsens_dates_and_sizes(tmp_path):
+    import re
+    from prelude import redact
+    conn, rpath = _seed(tmp_path)
+    _hist(conn, S, "SMALL", "2026-08-01T00:00:00Z", 678.0)
+    _hist(conn, C1, "SMALL", "2026-08-02T00:00:00Z", 4431.0)
+    res = check.check_token(conn, "SMALL", roster_path=rpath)
+    red = redact.redact_check(res, redact.Pseudonyms(str(tmp_path / "p.json")))
+    out = check.render(red)
+    assert not re.search(r"2026-\d\d-\d\d", out), out      # no exact days
+    assert "$678" not in out and "$4,431" not in out       # no exact sizes
+    assert "2026-W31" in out and "$100-1k" in out and "$1k-5k" in out
+    assert red["lead_hours"] == res["lead_hours"]           # the claim is kept
+    raw = redact.redact_check(res, redact.Pseudonyms(str(tmp_path / "p.json")),
+                              coarsen=False)
+    assert "$678" in check.render(raw)

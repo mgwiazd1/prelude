@@ -122,13 +122,37 @@ def main(argv=None):
                               "concentration_leave_out_top2_posthoc": conc,
                               "probe_hypothesis": probe}, indent=2))
             print(path)
+    elif cmd == "backtest-table":
+        # reads the COMMITTED public results: runs on a clean clone, no key
+        import os
+        base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.join(base, "results", "onset_backtest.public.json")) as f:
+            bt = json.load(f)
+        pre, age = bt["stats"], bt["sensitivity_age_matched_posthoc"]
+        conc = bt["concentration_leave_out_top2_posthoc"]["age_matched"]["hits"]
+        n = pre["n_pairs"]
+        def row(label, h, mark=""):
+            p = h["p_fisher"]
+            sig = "" if p is None or p < 0.05 else "  (not significant)"
+            return (f"{mark}{label:<46} {h['spike_hits']:>2}/{n}  {h['null_hits']:>2}/{n}"
+                    f"  {h['lift']:>4}x  p={p:.3f}{sig}")
+        print(f"Onset backtest - Solana, SM-netflow onsets Jul 3-Sep 15 2026, n={n} pairs")
+        print(f"  {'null control':<46} spike   null   lift")
+        b0, b1 = ("\033[1;33m", "\033[0m") if sys.stdout.isatty() else ("", "")
+        print(b0 + row("age-matched  [added after seeing results]", age["hits"], "> ") + b1)
+        print(row("market-cap matched  [pre-registered]", pre["hits"], "  "))
+        print(row("age-matched, top-2 wallets removed", conc, "  "))
+        print(f"  median lead {pre['median_lead_hours']:.0f}h (IQR "
+              f"{pre['iqr_lead_hours'][0]:.0f}-{pre['iqr_lead_hours'][1]:.0f}h, "
+              f"n={pre['n_leads']}) - bounded by the 7d window, not timing precision")
     elif cmd == "receipt-backtest":
         import os
         from . import receipt
         base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         with open(os.path.join(base, "out", "onset_backtest.json")) as f:
             bt = json.load(f)
-        print(receipt.render_confound(bt, os.path.join(base, "out", "receipt_backtest.png"),
+        # committed asset (README embeds it above the fold), not out/
+        print(receipt.render_confound(bt, os.path.join(base, "docs", "receipt_backtest.png"),
                                       repo_url=os.environ.get("PRELUDE_REPO_URL")))
     elif cmd == "check":
         if len(argv) < 2:

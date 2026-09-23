@@ -7,6 +7,7 @@ the roster changes; new wallets get the next free letter.
 """
 import json
 import os
+from datetime import datetime
 
 MAP_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                         "data", "pseudonyms.json")
@@ -47,17 +48,51 @@ class Pseudonyms:
             self._dirty = False
 
 
-def redact_check(res, pseudo):
+def week(ts):
+    """'2026-06-25T23:59:59' -> '2026-W26' (ISO week)."""
+    if not ts:
+        return ts
+    y, w, _ = datetime.fromisoformat(ts[:10]).isocalendar()
+    return f"{y}-W{w:02d}"
+
+
+def band(usd):
+    if usd is None:
+        return None
+    return ("<$100" if usd < 100 else "$100-1k" if usd < 1000
+            else "$1k-5k" if usd < 5000 else ">=$5k")
+
+
+def redact_check(res, pseudo, coarsen=True):
     """Return a copy of a check_token result with every wallet name/address
-    replaced by its pseudonym. Token addresses are public and kept."""
+    replaced by its pseudonym. Token addresses are public and kept.
+
+    coarsen (default): a pseudonym + exact day + exact size can be matched to
+    on-chain buyers of the token, so per-wallet dates become ISO weeks and
+    sizes become bands. Lead hours and the size floor (the claim) are kept."""
     out = json.loads(json.dumps(res))
     for side in ("signal", "cohort"):
         s = (out.get("entry_size") or {}).get(side)
         if s:
             s["wallet"] = pseudo(s.get("address"))
             s["address"] = s["wallet"]
+            if coarsen:
+                s["entry_usd"], s["peak_usd"] = band(s["entry_usd"]), band(s["peak_usd"])
     for t in out.get("top_holders") or []:
         t["wallet"] = pseudo(t.get("address"))
         t["address"] = t["wallet"]
-    out["redacted"] = True
+        if coarsen:
+            t["peak_usd"], t["entry_ts"] = band(t["peak_usd"]), week(t["entry_ts"])
+    if coarsen:
+        es = out.get("entry_size") or {}
+        if isinstance(es.get("floor"), str) and es["floor"].startswith("sub-"):
+            es["floor"] = "sub-1k"            # exact smallest entry is a fingerprint
+        for sn in out.get("snapshots") or []:
+            sn["tracked_value_usd"] = band(sn["tracked_value_usd"])
+        for side in ("signal_first", "cohort_first"):
+            e = (out.get("entry") or {}).get(side)
+            if e:
+                e["ts"] = week(e["ts"])
+    out["redacted"] = "pseudonyms + coarsened (ISO week, USD band)" if coarsen \
+        else "pseudonyms"
     return out

@@ -1,5 +1,9 @@
 # Prelude
 
+Built on the Nansen API for the Nansen Meridian Buildathon (Sep 14–27, 2026).
+
+![4.5× → 1.8× when you control for token age. n=56.](docs/receipt_backtest.png)
+
 **Do operator wallets enter tokens before smart money piles in?**
 
 Prelude tracks a private roster of operator wallets through the Nansen API, and
@@ -13,7 +17,7 @@ we put through it was our own, and it didn't survive the null:
 
 **4.5× → 1.8× when you control for token age. n=56.** Most of the apparent
 lead is a young-token effect: the roster buys young tokens, and young tokens
-are where smart-money onsets happen. The rest of the edge is concentrated in
+are where smart-money onsets happen. The remaining gap is concentrated in
 two wallets. Without them, the age-matched lift is 1.0× (8/56 vs 8/56). That
 is a statement about concentration only. Per-wallet n is tiny and the check
 was also chosen after seeing results, so it says nothing about skill.
@@ -40,19 +44,27 @@ shows which ones survive.**
    the example roster (`data/roster.example.json`: public exchange and
    public-figure addresses).
 
-3. **Tests** (43, no network): `make test`
+3. **Tests** (44, no network): `make test`
 
-## The roster is private, on purpose
+4. **The backtest table** from the committed results (no key):
+   `python3 -m prelude backtest-table`
 
-The roster is the edge; the math is not. Publishing the addresses would let
-anyone front-run the same set, so the operator roster isn't in this repo. All
-public output (`check`, the recording, this README, the receipt card) is
-**redacted**: wallets appear as stable pseudonyms (`Wallet A`, `Wallet B`, …),
-with the mapping kept privately. Wallet names count as addresses because SNS
-names (`x.sol`) resolve to addresses. The published backtest file
-(`results/onset_backtest.public.json`) goes further. It carries per-window
-**hit counts** only, because a wallet × token × day list could be intersected
-with on-chain buyers to de-anonymise the roster.
+## Why the roster is private
+
+The roster isn't claimed to have an edge; the headline above says it mostly
+doesn't. It is private because operator attribution is private research.
+Publishing it would identify individual wallets, using attribution data we
+can't redistribute.
+
+So all public output (`check`, the recording, this README, the receipt card)
+is **redacted**:
+- Wallets appear as stable pseudonyms (`Wallet A`, `Wallet B`, …), with the
+  mapping kept privately. Wallet names count as addresses, because SNS names
+  (`x.sol`) resolve to addresses.
+- `check` also coarsens per-wallet dates to ISO weeks and sizes to bands. A
+  pseudonym plus an exact day and amount could be matched to on-chain buyers.
+- The published backtest file (`results/onset_backtest.public.json`) carries
+  per-window **hit counts** only, never which wallet.
 
 ## How it works
 
@@ -65,7 +77,9 @@ snapshot order. Snapshot order only tells you when our poller started.
 
 **`check <token>`** reads stored data only (0 API calls) and answers "did the
 signal wallets enter before the rest of the tracked roster?". Verdicts:
-`SIGNAL_LEAD` / `COHORT_LEAD` / `CONCURRENT` / `SIGNAL_ONLY` / `COHORT_ONLY`.
+`SIGNAL_LEAD` / `COHORT_LEAD` / `CONCURRENT` / `SIGNAL_ONLY` / `COHORT_ONLY` /
+`UNVERIFIED_ENTRY_TIMING` (entry order can't be established: snapshot-only
+entry, or both sides already held when history begins).
 Every verdict prints:
 - a provenance line, because a lead claim is only valid when both entry times
   come from the backfill;
@@ -76,6 +90,23 @@ The "cohort" is our own tracked wallets, not the public.
 ```bash
 python3 -m prelude check <symbol-or-address>        # redacted by default
 ```
+
+**Nansen endpoints used** (credits per call; costs are confirmed from the
+`X-Nansen-Credits-Cost` header or the credit balance):
+
+| Endpoint | Used for | Credits |
+|---|---|---|
+| `POST /api/v1/profiler/address/current-balance` | 3h live snapshot, per wallet | 1 |
+| `POST /api/v1/profiler/address/historical-balances` | 90-day entry-history backfill | 1 per page |
+| `POST /api/v1beta1/token-screener/historical` (`trader_type=sm`) | daily smart-money netflow: the backtest onset clock | 5 |
+| `POST /api/v1/profiler/address/transactions` | roster screening (activity in the last 30 days) | 1 |
+| `POST /api/v1/profiler/address/related-wallets` | roster expansion candidates (human-approved) | 1 |
+| `POST /api/v1/profiler/address/labels` | checking the public example addresses | ~127 |
+| `POST /api/v1/tgm/token-ohlcv` | request shape verified (10 tokens per call); not used in the results | 1 |
+
+We probed these during design and didn't use them: `tgm/flows`,
+`tgm/flow-intelligence`, `smart-money/netflow`, `tgm/who-bought-sold`, and
+`v1beta1/tgm/historical-who-bought-sold`.
 
 **The backtest** (`prelude/onset.py`, parameters fixed in its docstring
 before the first run):
@@ -147,7 +178,7 @@ The same wallet spine runs on a different clock per chain:
 
 ## Limits
 
-- **Controlling for token age removes most of the edge**, as reported above:
+- **Controlling for token age removes most of the gap**, as reported above:
   1.8×, not significant. The age control was added after seeing results. The
   pre-registered 4.5× is shown beside it, not instead of it.
 - **n=56 pairs, short of the 100 we targeted.** The onset rule is strict, and

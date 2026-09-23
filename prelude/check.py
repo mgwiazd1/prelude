@@ -296,6 +296,11 @@ def _peak(conn, holder, token_address, token_symbol):
     return 0.0
 
 
+def _usd(v):
+    """Exact dollars, or a redaction band passed through as-is."""
+    return v if isinstance(v, str) else f"${v:,.0f}"
+
+
 def _prov_word(p):
     return {"backfill": "backfill(real-entry)",
             "snapshot": "snapshot-order(poller-start)",
@@ -347,8 +352,8 @@ def render(res):
         if not s:
             return "—"
         # peak is VALUE (moves with price), not position size
-        return (f"{s['wallet']} day1=${s['entry_usd']:,.0f} "
-                f"(peak value ${s['peak_usd']:,.0f})")
+        return (f"{s['wallet']} day1={_usd(s['entry_usd'])} "
+                f"(peak value {_usd(s['peak_usd'])})")
     lines.append(f"size    signal: {_sz_word(sz.get('signal'))}  "
                  f"cohort: {_sz_word(sz.get('cohort'))}")
     fl = sz.get("floor")
@@ -360,7 +365,9 @@ def render(res):
             lines.append("floor   entry size >= $1k, < $5k on BOTH first "
                          "entries [small-scale lead — not conviction-scale]")
         else:
-            lines.append(f"floor   smallest first entry ${fl.split('-',1)[-1]} "
+            amt = fl.split('-', 1)[-1]
+            amt = "under $1k" if amt == "1k" else f"${amt}"   # "sub-1k" = redacted
+            lines.append(f"floor   smallest first entry {amt} "
                          "— SUB-$1K [small-position lead; "
                          "stated small, not conviction-scale]")
     lines.append(f"n       {res['n_wallets_total_tracked']} tracked wallets "
@@ -371,13 +378,13 @@ def render(res):
         for s in res["snapshots"]:
             lines.append(f"  snap {s['snapshot']} ({s['ts'][:16]}) "
                          f"holders={s['n_holders']:<3} sig={s['n_signal']:<2} "
-                         f"val=${s['tracked_value_usd']:,.0f}")
+                         f"val={_usd(s['tracked_value_usd'])}")
     lines.append("top    ")
     for t in res["top_holders"]:
         tag = "S" if t["signal"] else " "
         src = {"backfill": "bf", "snapshot": "snap", "none": "--"}[t["entry_source"]]
         et = t["entry_ts"][:10] if t["entry_ts"] else ""
-        lines.append(f"  [{tag}] {t['wallet']:<22} ${t['peak_usd']:>10,.0f}  "
+        lines.append(f"  [{tag}] {t['wallet']:<22} {_usd(t['peak_usd']):>11}  "
                      f"entry@{src:<4} {et}")
     lines.append(f"prov    signal-entry={_prov_word(res['provenance']['signal'])}"
                  f"  cohort-entry={_prov_word(res['provenance']['cohort'])}"
