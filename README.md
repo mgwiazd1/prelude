@@ -25,6 +25,22 @@ was also chosen after seeing results, so it says nothing about skill.
 That's the product: **Prelude measures lead claims against matched nulls and
 shows which ones survive.**
 
+## Scope: first run
+
+- **This is the method's first run:** one cohort (45 operator wallets, 41
+  with history), one chain (Solana), 90 days, one onset definition, n=56.
+- **The finding covers this cohort only.** It says nothing about smart money
+  in general.
+- **The test doesn't depend on the cohort.** Any wallet list goes through the
+  same pipeline: a roster file goes in, and a matched-null lift comes out.
+- **Next runs (roadmap, not built):**
+  - larger and different cohorts, including Nansen's own Smart Money segment
+    as a comparison cohort;
+  - Base and Robinhood Chain, with the maturation question;
+  - longer history, to push n past 100.
+
+  These widen what gets tested next. The age-matched result above stands.
+
 ## Quick start
 
 1. **Demo: no API key, no network. This is the judge path.**
