@@ -1,0 +1,15 @@
+{
+  "spike_windows": 100,
+  "control_windows": 100,
+  "window_hours": 6,
+  "per_wallet": [
+    {
+      "address": "0xDE00000000000000000000000000000000000001",
+      "spike_hits": 12,
+      "control_hits": 1,
+      "median_lead_hours": 14.0,
+      "iqr_lead_hours": [8.0, 22.0],
+      "note": "fixture: stand-in for the Lead-Reliability Backtest (100 spike + 100 null-control windows, 6h who-bought-sold windows, v1.6)"
+    }
+  ]
+}

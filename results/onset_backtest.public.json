@@ -1,0 +1,2159 @@
+{
+  "stats": {
+    "n_pairs": 56,
+    "hits": {
+      "spike_hits": 18,
+      "null_hits": 4,
+      "hit_rate_spike": 0.321,
+      "hit_rate_null": 0.071,
+      "lift": 4.5,
+      "p_fisher": 0.0015
+    },
+    "hits_1k": {
+      "spike_hits": 14,
+      "null_hits": 1,
+      "hit_rate_spike": 0.25,
+      "hit_rate_null": 0.018,
+      "lift": 14.0,
+      "p_fisher": 0.0004
+    },
+    "n_leads": 18,
+    "median_lead_hours": 120.0,
+    "iqr_lead_hours": [
+      72.0,
+      162.0
+    ],
+    "iqr_floor": 5
+  },
+  "sensitivity_age_matched_posthoc": {
+    "n_pairs": 56,
+    "hits": {
+      "spike_hits": 18,
+      "null_hits": 10,
+      "hit_rate_spike": 0.321,
+      "hit_rate_null": 0.179,
+      "lift": 1.8,
+      "p_fisher": 0.1258
+    },
+    "hits_1k": {
+      "spike_hits": 14,
+      "null_hits": 5,
+      "hit_rate_spike": 0.25,
+      "hit_rate_null": 0.089,
+      "lift": 2.8,
+      "p_fisher": 0.042
+    },
+    "n_leads": 18,
+    "median_lead_hours": 120.0,
+    "iqr_lead_hours": [
+      72.0,
+      162.0
+    ],
+    "iqr_floor": 5
+  },
+  "concentration_leave_out_top2_posthoc": {
+    "pre_registered": {
+      "k": 2,
+      "top_wallet_spike_hits": [
+        10,
+        6
+      ],
+      "hits": {
+        "spike_hits": 8,
+        "null_hits": 3,
+        "hit_rate_spike": 0.143,
+        "hit_rate_null": 0.054,
+        "lift": 2.67,
+        "p_fisher": 0.2027
+      }
+    },
+    "age_matched": {
+      "k": 2,
+      "top_wallet_spike_hits": [
+        10,
+        6
+      ],
+      "hits": {
+        "spike_hits": 8,
+        "null_hits": 8,
+        "hit_rate_spike": 0.143,
+        "hit_rate_null": 0.143,
+        "lift": 1.0,
+        "p_fisher": 1.0
+      }
+    }
+  },
+  "probe_hypothesis": {
+    "definition": "first entry < $1,000; scaled = amount >= 2.0x within 14d; other_followed = other population first-enters within 14d",
+    "signal_in_spike_windows": {
+      "n": 1,
+      "scaled": 0,
+      "other_followed": 0,
+      "scaled_rate": 0.0,
+      "other_followed_rate": 0.0
+    },
+    "signal_in_null_windows": {
+      "n": 0,
+      "scaled": 0,
+      "other_followed": 0,
+      "scaled_rate": null,
+      "other_followed_rate": null
+    },
+    "signal_all": {
+      "n": 66,
+      "scaled": 14,
+      "other_followed": 32,
+      "scaled_rate": 0.212,
+      "other_followed_rate": 0.485
+    },
+    "cohort_all_baseline": {
+      "n": 292,
+      "scaled": 67,
+      "other_followed": 62,
+      "scaled_rate": 0.229,
+      "other_followed_rate": 0.212
+    }
+  },
+  "pairs": [
+    {
+      "day": "2026-07-03",
+      "spike": {
+        "token": "B6f27ETGcjgGNB1fqULJbXVmw9FnL8HgBp7R83hmpump",
+        "symbol": "DROOLING",
+        "sm_netflow": 16900.262046404627,
+        "mcap": 2335464.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "ACtfUWtgvaXrQGNMiohTusi5jcx5RJf5zwu9aAxkpump",
+        "symbol": "UNC",
+        "mcap": 1917257.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-04",
+      "spike": {
+        "token": "BcHEaaTCvycPwwsJ9yQTXdHP9X2gCLkznDbZ8VySpump",
+        "symbol": "JOTCHUA",
+        "sm_netflow": 36959.072770297505,
+        "mcap": 8904127.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "BCdwQBAn8dYB5YjTsoB6TdHAWokxv28k2oZUodERpump",
+        "symbol": "MANIFEST",
+        "mcap": 19534537.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-04",
+      "spike": {
+        "token": "Bqs76KADGDkiwskqdqTu1jaNrpJyzV5ZxpvJrL5npump",
+        "symbol": "HOBBES",
+        "sm_netflow": 11874.403850702023,
+        "mcap": 2047837.55867615,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "ACtfUWtgvaXrQGNMiohTusi5jcx5RJf5zwu9aAxkpump",
+        "symbol": "UNC",
+        "mcap": 1806565.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-04",
+      "spike": {
+        "token": "FeMbDoX7R1Psc4GEcvJdsbNbZA3bfztcyDCatJVJpump",
+        "symbol": "THREE",
+        "sm_netflow": 25577.58042739601,
+        "mcap": 1318731.0,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "ACpzkGJV3DDU8HXy8yjab7RL9qNmDGym2GwLkzNppump",
+        "symbol": "SON",
+        "mcap": 1332154.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-05",
+      "spike": {
+        "token": "68Nq68CrtLVpyvK5Un7UADiNczaGf39hBbj3diRsYj6D",
+        "symbol": "NEST",
+        "sm_netflow": 28342.75452209192,
+        "mcap": 4213820.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4SnKwnz6DyagftnFqdxsvWvehrcbEDhxmmXNQk2Jpump",
+        "symbol": "JOBY",
+        "mcap": 3549970.68213553,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-07",
+      "spike": {
+        "token": "2kcdBw85q4qMVCjUkEynTnZ3bGbBeCqZRDRNLpeWpump",
+        "symbol": "TRAINDOG",
+        "sm_netflow": 17942.483251476402,
+        "mcap": 1159944.92349173,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "ACtfUWtgvaXrQGNMiohTusi5jcx5RJf5zwu9aAxkpump",
+        "symbol": "UNC",
+        "mcap": 1149354.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-07",
+      "spike": {
+        "token": "JCKwsT8UAbygnFkZ7u3amDUM7BXRtwUhCsHQv2khpump",
+        "symbol": "CHANCE",
+        "sm_netflow": 10877.632286290424,
+        "mcap": 2158459.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "HULaBKR1eK3SA18FpfEav8Z2t7TJ1qEC775YHTLNpump",
+        "symbol": "DAVID",
+        "mcap": 2259977.19648364,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-10",
+      "spike": {
+        "token": "8wxkvAfEns76yBzu4MnbV7VnXWjg3iDPA9uwAQ6cpump",
+        "symbol": "SOLANGELES",
+        "sm_netflow": 15356.583015569116,
+        "mcap": 2182209.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "6ehEcTMCc85aNF4x9CWx8HuvWGhxQtvKdhKVf2HDpump",
+        "symbol": "TOESCOIN",
+        "mcap": 2049159.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-12",
+      "spike": {
+        "token": "Tqj8yFmagrg7oorpQkVGYR52r96RFTamvWfth9bpump",
+        "symbol": "KINS",
+        "sm_netflow": 16383.24555898355,
+        "mcap": 8150520.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "42cXQvAAr7hcPBPWAS4ocVtDyeJ4Fa6gRR2uG4gppump",
+        "symbol": "TBB",
+        "mcap": 8650651.60057918,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-13",
+      "spike": {
+        "token": "FHi4YQN2mXrSG5SWZet2oND1w6PVeHkhRqSCheSxpump",
+        "symbol": "FOLK",
+        "sm_netflow": 10228.305753260116,
+        "mcap": 122526.742705565,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "124Yn3UCD4YBb8JcyW6A2g9jjgG4Ykp8VBp7XQNQpump",
+        "symbol": "SELLOR",
+        "mcap": 118947.61897449,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-17",
+      "spike": {
+        "token": "CREDBHvVqREBCAxMihzr8D1nepHMr2gmQoZWpmgGmeta",
+        "symbol": "CRED",
+        "sm_netflow": 55619.559590091,
+        "mcap": 13083334.196924,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4MrsXQzaosYNyFd4wKDvgnC5xRtRqgXRrijFTGj9pump",
+        "symbol": "NORMIE",
+        "mcap": 11767689.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-18",
+      "spike": {
+        "token": "SNDKbwMUQvZhnLnxLduradgLHG5KrPuKwpnrkkGRhfH",
+        "symbol": "SNDK",
+        "sm_netflow": 30792.8629054082,
+        "mcap": 1278501.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "8wxkvAfEns76yBzu4MnbV7VnXWjg3iDPA9uwAQ6cpump",
+        "symbol": "SOLANGELES",
+        "mcap": 1331638.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-19",
+      "spike": {
+        "token": "4ko5tSr5o3H4v1sFtjTSd9MPUW7yx5AFCpkNPoL6pump",
+        "symbol": "FEBU",
+        "sm_netflow": 10390.721487235682,
+        "mcap": 1095661.0,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "9Pfync3ejPC9eHqVzq3nYQJAhyhjqpnB9UsaSfLxpump",
+        "symbol": "KET",
+        "mcap": 1089636.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-29",
+      "spike": {
+        "token": "9Pfync3ejPC9eHqVzq3nYQJAhyhjqpnB9UsaSfLxpump",
+        "symbol": "KET",
+        "sm_netflow": 12954.876510941769,
+        "mcap": 7424918.0,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "4MrsXQzaosYNyFd4wKDvgnC5xRtRqgXRrijFTGj9pump",
+        "symbol": "NORMIE",
+        "mcap": 6862702.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-31",
+      "spike": {
+        "token": "AzeNfRi7DX5HndH7dUgCxMD5sQPV7FPFH1cwDkoqpump",
+        "symbol": "KNIGHT",
+        "sm_netflow": 14617.217958293139,
+        "mcap": 1046625.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "8wxkvAfEns76yBzu4MnbV7VnXWjg3iDPA9uwAQ6cpump",
+        "symbol": "SOLANGELES",
+        "mcap": 1189231.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-31",
+      "spike": {
+        "token": "EmcxFTNVDqyLHp11NvwvLZ4D7LKGbG9i7B8RF7dwpump",
+        "symbol": "ZERO",
+        "sm_netflow": 10207.47558250139,
+        "mcap": 2283219.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4SnKwnz6DyagftnFqdxsvWvehrcbEDhxmmXNQk2Jpump",
+        "symbol": "JOBY",
+        "mcap": 2481808.83173568,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-01",
+      "spike": {
+        "token": "7z5KZpYj7BEnGKGCY3kDkaX32ueBSNp8QjvFq8Lxpump",
+        "symbol": "\u65fa\u65fa",
+        "sm_netflow": 20244.595906995914,
+        "mcap": 572970.838972726,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4ko5tSr5o3H4v1sFtjTSd9MPUW7yx5AFCpkNPoL6pump",
+        "symbol": "FEBU",
+        "mcap": 678591.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-04",
+      "spike": {
+        "token": "CFPkPq1eYPR8GLzEo59wUbbMioX4bshaTQiSGzTSpump",
+        "symbol": "MENSA",
+        "sm_netflow": 16102.116422327535,
+        "mcap": 1687530.93754377,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "BcHEaaTCvycPwwsJ9yQTXdHP9X2gCLkznDbZ8VySpump",
+        "symbol": "JOTCHUA",
+        "mcap": 1650930.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-05",
+      "spike": {
+        "token": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+        "symbol": "STONK",
+        "sm_netflow": 10395.675844564765,
+        "mcap": 6803588.0,
+        "hits": 2,
+        "hits_1k": 2
+      },
+      "null": {
+        "token": "BCdwQBAn8dYB5YjTsoB6TdHAWokxv28k2oZUodERpump",
+        "symbol": "MANIFEST",
+        "mcap": 8033308.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-06",
+      "spike": {
+        "token": "Ge87EtsjwRQbHaqQmKRno69RFTwh9bfSsm99XNxTpump",
+        "symbol": "JIMOTHY",
+        "sm_netflow": 11349.892420832197,
+        "mcap": 3722534.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "Tqj8yFmagrg7oorpQkVGYR52r96RFTamvWfth9bpump",
+        "symbol": "KINS",
+        "mcap": 2799797.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-09",
+      "spike": {
+        "token": "Ai66LHZG9MCzg1WKdawwqduVAXpNDUuV8M3uyq5ppump",
+        "symbol": "CATE",
+        "sm_netflow": 39647.38846788334,
+        "mcap": 20468811.6235493,
+        "hits": 3,
+        "hits_1k": 2
+      },
+      "null": {
+        "token": "HcfnJxLov6tY8i1dq9uYRRZKCvxADPpovcfkyXzdpump",
+        "symbol": "CHONKETHA",
+        "mcap": 8716212.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-13",
+      "spike": {
+        "token": "HxQhDGYqyjorgogMJx7YbBHADEDxuHhLnMMmr6VYpyn",
+        "symbol": "MANLET",
+        "sm_netflow": 12172.286906522146,
+        "mcap": 3892157.94992217,
+        "hits": 1,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "9Pfync3ejPC9eHqVzq3nYQJAhyhjqpnB9UsaSfLxpump",
+        "symbol": "KET",
+        "mcap": 4489206.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-16",
+      "spike": {
+        "token": "A13oRB9FFaiUjfi6LdCg6p9ka1u8SfGkUFs4SKvPpump",
+        "symbol": "TOAD",
+        "sm_netflow": 28173.10698966461,
+        "mcap": 5364529.4703942,
+        "hits": 3,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "4MrsXQzaosYNyFd4wKDvgnC5xRtRqgXRrijFTGj9pump",
+        "symbol": "NORMIE",
+        "mcap": 4749463.67865443,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-17",
+      "spike": {
+        "token": "9sfCHMLWSVy6MD6zr7pR1gD3qbT7C6K1E3dMf2ZBpump",
+        "symbol": "LAYOOO",
+        "sm_netflow": 25839.116596259642,
+        "mcap": 2747001.74837917,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "3t7sE6tF7oTSaPZLkSdmGyCVVMDAh6Q9taJddF2Hpump",
+        "symbol": "DYSON",
+        "mcap": 2834130.40109202,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-20",
+      "spike": {
+        "token": "7ssJZGFT3twGqeYA1kvpoMWwZYvMZvrMEbjRaWgg46BL",
+        "symbol": "BUTTHOLE",
+        "sm_netflow": 13190.170139238811,
+        "mcap": 1626488.89391629,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4kjruqGHDsSqkMdFfCjV7Vb62HPFhtXyWc2t6JpQzDnz",
+        "symbol": "GTA6",
+        "mcap": 1473535.79334244,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-22",
+      "spike": {
+        "token": "E3i7sTY5QYEBh3itepnomZQt7Eh5kzmHFk1vkm2pump",
+        "symbol": "CC",
+        "sm_netflow": 12069.632198814841,
+        "mcap": 4361663.35613538,
+        "hits": 2,
+        "hits_1k": 2
+      },
+      "null": {
+        "token": "BcHEaaTCvycPwwsJ9yQTXdHP9X2gCLkznDbZ8VySpump",
+        "symbol": "JOTCHUA",
+        "mcap": 4425513.62495003,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-23",
+      "spike": {
+        "token": "GPzpoXpD74E2C4CJNayuoyBqPQJEsPtdse3nhntrpump",
+        "symbol": "LOOKSMAX",
+        "sm_netflow": 23257.155149220074,
+        "mcap": 1470471.87915087,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "EmcxFTNVDqyLHp11NvwvLZ4D7LKGbG9i7B8RF7dwpump",
+        "symbol": "ZERO",
+        "mcap": 1776111.78082687,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-24",
+      "spike": {
+        "token": "EkcTa8n14fXcHdfvZqCg72cTCutJnnKb19vcHwKTpump",
+        "symbol": "QENIS",
+        "sm_netflow": 20927.89831564717,
+        "mcap": 2607239.72291052,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "FMqh9mqR6drPZqqW6wPqLHxX4rqNDWGhYLaMfoaJpump",
+        "symbol": "WORLD",
+        "mcap": 2137021.89893006,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-24",
+      "spike": {
+        "token": "Hos282xmdMJHwMjhni91fNqdjDsgWjgSckxuGc1Bpump",
+        "symbol": "TOKEN",
+        "sm_netflow": 20324.681785905534,
+        "mcap": 976161.798453236,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "GvUCjmWSXA5hrTh9smmNA1AU55YCtP9mDLQcrKA1pump",
+        "symbol": "WSOLP",
+        "mcap": 911380.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-25",
+      "spike": {
+        "token": "ApZuxdpzMrbEYTGEzeY9afh5pj9d6qPRJCTgQYiipbKg",
+        "symbol": "CYBERLEEK",
+        "sm_netflow": 12003.56668541819,
+        "mcap": 10439015.8712398,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "XSTuo1fV7HHMhs4BYiwtrWSLsMCJNrooH2AssWTYZqP",
+        "symbol": "XST",
+        "mcap": 10268472.4231174,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-27",
+      "spike": {
+        "token": "7n8kRipxAQBfpGQtcGA2AbkM2HASSVCzqZ5F3QEopump",
+        "symbol": "ZOE",
+        "sm_netflow": 21262.45773319606,
+        "mcap": 4065341.10770207,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "XSTuo1fV7HHMhs4BYiwtrWSLsMCJNrooH2AssWTYZqP",
+        "symbol": "XST",
+        "mcap": 2816056.51681836,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-27",
+      "spike": {
+        "token": "BoTx8y9ynfdxf5ZjWtCoBVkff52qKA82ysaLU8ZM6d8T",
+        "symbol": "BOT",
+        "sm_netflow": 28975.27754388456,
+        "mcap": 1402311.16016135,
+        "hits": 1,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "CFPkPq1eYPR8GLzEo59wUbbMioX4bshaTQiSGzTSpump",
+        "symbol": "MENSA",
+        "mcap": 1283335.31338754,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-27",
+      "spike": {
+        "token": "HeeBovJNKd27tQ6xkeP1dfSyTr8LyLwhJz9wfFTbPLEX",
+        "symbol": "HEEBOO",
+        "sm_netflow": 20354.09745876981,
+        "mcap": 11331831.5142653,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "CREDBHvVqREBCAxMihzr8D1nepHMr2gmQoZWpmgGmeta",
+        "symbol": "CRED",
+        "mcap": 13987488.2050358,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-28",
+      "spike": {
+        "token": "2NffKvfZTcFj2tyoY1Ev84PkqxA7DZnstyv6EwELpump",
+        "symbol": "SUE",
+        "sm_netflow": 16469.45874879481,
+        "mcap": 487077.166466739,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "DMXBsVBwfuzc5axa2vz6Ba2BzAxcUmn6V7ZtsJFEpump",
+        "symbol": "TOADS",
+        "mcap": 479706.688069559,
+        "hits": 1,
+        "hits_1k": 1
+      }
+    },
+    {
+      "day": "2026-08-30",
+      "spike": {
+        "token": "zj1jpp7QMveWHLs61vL9KMZf254KvW7j4AAmBF8ry2k",
+        "symbol": "BULLSHIT",
+        "sm_netflow": 41307.14719342618,
+        "mcap": 3888782.09815854,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "udPEzBjbGMzYZbuLtByqLYhc4TEs6EebG8R7fwdpump",
+        "symbol": "TEXTIT",
+        "mcap": 4408285.08330379,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-31",
+      "spike": {
+        "token": "6dX5M8DY6VTFtVRX5yzWn9RE4MkJTyoAVbAodk6cpump",
+        "symbol": "GEOM",
+        "sm_netflow": 14697.577657157211,
+        "mcap": 896887.094157893,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "CARSsxWPkpQWvfyRBwfGMGvysJBHdHGfE46X5MNgmeta",
+        "symbol": "CARS",
+        "mcap": 844251.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-01",
+      "spike": {
+        "token": "GvUCjmWSXA5hrTh9smmNA1AU55YCtP9mDLQcrKA1pump",
+        "symbol": "WSOLP",
+        "sm_netflow": 13948.40703996193,
+        "mcap": 2705889.22941578,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "BcHEaaTCvycPwwsJ9yQTXdHP9X2gCLkznDbZ8VySpump",
+        "symbol": "JOTCHUA",
+        "mcap": 2125882.85956114,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-04",
+      "spike": {
+        "token": "CTPoyCwkjMvoJwU4xvZZqoD8tiYk6yDchySiN5gGpump",
+        "symbol": "FONE",
+        "sm_netflow": 115305.10990432155,
+        "mcap": 9305848.99807695,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "42cXQvAAr7hcPBPWAS4ocVtDyeJ4Fa6gRR2uG4gppump",
+        "symbol": "TBB",
+        "mcap": 8994422.4314801,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-07",
+      "spike": {
+        "token": "8RNUw4N655VSrZKuhGdywhbSMDTrheguFPfxbpE2NZHQ",
+        "symbol": "PURR",
+        "sm_netflow": 46152.883020507375,
+        "mcap": 5931898.94615584,
+        "hits": 1,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "SiLVFMgD3eD2rgK628NbTBq9MnuJF5FW2CRaVyTB35L",
+        "symbol": "SILV",
+        "mcap": 6136661.49112369,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-08",
+      "spike": {
+        "token": "CFNRDaxFcvRwRSNnA5cHrCCr6AHhk9dNkHWpRUjNupFL",
+        "symbol": "RAYCAT",
+        "sm_netflow": 19279.400447869586,
+        "mcap": 2003826.07801522,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "FMqh9mqR6drPZqqW6wPqLHxX4rqNDWGhYLaMfoaJpump",
+        "symbol": "WORLD",
+        "mcap": 2008117.43745561,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-08",
+      "spike": {
+        "token": "EpXtn6xGoZ4Y45vRjiDUHSCGbBoJD5FaEqZbF98YswH1",
+        "symbol": "MADE",
+        "sm_netflow": 23078.315447190293,
+        "mcap": 706027.633387356,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4kjruqGHDsSqkMdFfCjV7Vb62HPFhtXyWc2t6JpQzDnz",
+        "symbol": "GTA6",
+        "mcap": 709577.690655925,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-09",
+      "spike": {
+        "token": "EbT2jpoeRJVFNWAFJE97EGfQF3iwHsEY8sh17fGbL5ER",
+        "symbol": "ZDOG",
+        "sm_netflow": 13079.112610770986,
+        "mcap": 750535.164589286,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "DUZN7M6ezXez9UVrou4N8UEGRkwnbWmXqqZgEKiZCrnN",
+        "symbol": "MARKET",
+        "mcap": 804051.886999804,
+        "hits": 1,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-09",
+      "spike": {
+        "token": "HooDYv5RewLRiMLnEVq3VJqdqxhuE6c5eYvqejMC3e9A",
+        "symbol": "HOOD",
+        "sm_netflow": 19993.16655162586,
+        "mcap": 683362.101286933,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "oPAiAikWTaFj9RYoRFD35ccfwhnMcB3ThgBZRHSkjTZ",
+        "symbol": "TOPENAI",
+        "mcap": 606304.743879149,
+        "hits": 1,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-10",
+      "spike": {
+        "token": "8K5X85PAJHAAVSvYaAzgVPPAPsqqHmvx16ZyBiscYF8L",
+        "symbol": "CTO",
+        "sm_netflow": 24555.15178256287,
+        "mcap": 2694502.18772137,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "SNDKbwMUQvZhnLnxLduradgLHG5KrPuKwpnrkkGRhfH",
+        "symbol": "SNDK",
+        "mcap": 1951405.03056496,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-10",
+      "spike": {
+        "token": "XkeTXo1125vz5H9svJpGiw4JvLbN8VmMu9cmMvspump",
+        "symbol": "DREGG",
+        "sm_netflow": 13861.579288623892,
+        "mcap": 1769031.26434537,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "storenSbvkfzircixnaosc5CbzNZVrHJ6S3EKrS1yqR",
+        "symbol": "STORE",
+        "mcap": 1907334.29141221,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-11",
+      "spike": {
+        "token": "C5nG72gUFJz6wewcgTPjcBmpSq4BwFLHy5j8heo9d7rZ",
+        "symbol": "USDC",
+        "sm_netflow": 14102.241969233615,
+        "mcap": 323901.018755631,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "LLYuwZ33keFihgwoxXsBawy31AiRFLFSva32TYq5TvD",
+        "symbol": "LLY",
+        "mcap": 329303.898546654,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-11",
+      "spike": {
+        "token": "CB1YQfUzgsnaCd93cZLdiX1uASW7utWBaYMUsvcwNUBV",
+        "symbol": "LOOM",
+        "sm_netflow": 33762.642167452796,
+        "mcap": 2274405.70509692,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "HeeBovJNKd27tQ6xkeP1dfSyTr8LyLwhJz9wfFTbPLEX",
+        "symbol": "HEEBOO",
+        "mcap": 1993766.79535,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-11",
+      "spike": {
+        "token": "PerPsCe2SJ7Q25CN4R5TTX4fmBdmknE2hQmqCt96fHL",
+        "symbol": "PERPSPAD",
+        "sm_netflow": 13724.567196982978,
+        "mcap": 1063390.45793737,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "Ab1sTFNv2tV5DX1XpriwNehXgiJhdq2RQ5LtD5BXpump",
+        "symbol": "DOPAMEME",
+        "mcap": 1138823.37384828,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-12",
+      "spike": {
+        "token": "FFT4bgyrvzyB5TKAziLkAzBj8mboduzJeDdZ27TU4FHm",
+        "symbol": "DEX",
+        "sm_netflow": 10514.266067044628,
+        "mcap": 1486654.10210166,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "BoTx8y9ynfdxf5ZjWtCoBVkff52qKA82ysaLU8ZM6d8T",
+        "symbol": "BOT",
+        "mcap": 1459435.1262127,
+        "hits": 2,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-13",
+      "spike": {
+        "token": "GhuEi5AWtZaWuAda4ysJwMTzU8oMdjiL1bz6eziptT2p",
+        "symbol": "FROGE",
+        "sm_netflow": 11874.748817083015,
+        "mcap": 774607.864920244,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4ChT49V1iazP2XUGtycGkEsS6pRMqvGfUbqvRC9Z91ZT",
+        "symbol": "MOS",
+        "mcap": 752897.110473681,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-14",
+      "spike": {
+        "token": "8RVBk8vxLiUHueLUW1f4izFVqN3nWippLhkohKg6EGkS",
+        "symbol": "KNOTS",
+        "sm_netflow": 46934.68389751391,
+        "mcap": 22181057.91,
+        "hits": 2,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "E4Ap4icMLwKot8rkkTbq5JkS5kZxt5XCE3yfxbzYBjHx",
+        "symbol": "BTC",
+        "mcap": 6481823.41481392,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-14",
+      "spike": {
+        "token": "ZesMGYmokFiEuDvNzWeMhB7jxF6eUW8c512vwSKSTNK",
+        "symbol": "\ud83c\udf92",
+        "sm_netflow": 56797.26434217994,
+        "mcap": 1352307.68393859,
+        "hits": 1,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "6V7cF52p3eSkRuoVXnAryWVwoyS775DERenYPMMYBPxS",
+        "symbol": "POINTFARMC",
+        "mcap": 1389201.752536,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-15",
+      "spike": {
+        "token": "DkPQvrx7CDYrL4HfHijz6GqZLYm7Pd4rm1kTiumLFwhS",
+        "symbol": "STONKCAT",
+        "sm_netflow": 40549.464766099474,
+        "mcap": 853881.42120837,
+        "hits": 2,
+        "hits_1k": 2
+      },
+      "null": {
+        "token": "DRAMjSWR7HRfJKjRkvQWYL2bcaejaVhuxEcjf4pAY4Cw",
+        "symbol": "DRAM",
+        "mcap": 870750.800445433,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-15",
+      "spike": {
+        "token": "GWTP6M5bxhaJ1k2Kxvf8hhYaHE6jZMhh4cKzFuCpnc83",
+        "symbol": "USEFUL",
+        "sm_netflow": 11388.715144512895,
+        "mcap": 1619982.54224021,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "SNDKbwMUQvZhnLnxLduradgLHG5KrPuKwpnrkkGRhfH",
+        "symbol": "SNDK",
+        "mcap": 1776753.77537426,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-15",
+      "spike": {
+        "token": "MukLDtJ8Cx9DxLbeyLRSWPSposTMWuwHANbuaudpump",
+        "symbol": "OTC",
+        "sm_netflow": 59231.04787194245,
+        "mcap": 3147566.06494032,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "Ge87EtsjwRQbHaqQmKRno69RFTwh9bfSsm99XNxTpump",
+        "symbol": "JIMOTHY",
+        "mcap": 3967398.80450861,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-15",
+      "spike": {
+        "token": "bykrhkExmjWco2mFxKGX3XPmPVaZB9JJp9MkRe8pump",
+        "symbol": "SHREK",
+        "sm_netflow": 11476.271716542225,
+        "mcap": 435708.454848609,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "MsGDybWRSNdNXkdDZhEksgzugT5CbVWUG2wkhwgpump",
+        "symbol": "MEIMEI",
+        "mcap": 458590.961176697,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    }
+  ],
+  "pairs_age_matched": [
+    {
+      "day": "2026-07-03",
+      "spike": {
+        "token": "B6f27ETGcjgGNB1fqULJbXVmw9FnL8HgBp7R83hmpump",
+        "symbol": "DROOLING",
+        "sm_netflow": 16900.262046404627,
+        "mcap": 2335464.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "23Y1bUqVcJsvWH9WpVJfj1xDozq2GdKbEhRSdGhDpump",
+        "symbol": "SOL777",
+        "mcap": 1003537.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-04",
+      "spike": {
+        "token": "BcHEaaTCvycPwwsJ9yQTXdHP9X2gCLkznDbZ8VySpump",
+        "symbol": "JOTCHUA",
+        "sm_netflow": 36959.072770297505,
+        "mcap": 8904127.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "ACpzkGJV3DDU8HXy8yjab7RL9qNmDGym2GwLkzNppump",
+        "symbol": "SON",
+        "mcap": 1332154.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-04",
+      "spike": {
+        "token": "Bqs76KADGDkiwskqdqTu1jaNrpJyzV5ZxpvJrL5npump",
+        "symbol": "HOBBES",
+        "sm_netflow": 11874.403850702023,
+        "mcap": 2047837.55867615,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "5pYB12kEhfhSFXJjZ7JtyqDpt6uUqhsF6iu6Ee9spump",
+        "symbol": "CATWIF",
+        "mcap": 1252083.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-04",
+      "spike": {
+        "token": "FeMbDoX7R1Psc4GEcvJdsbNbZA3bfztcyDCatJVJpump",
+        "symbol": "THREE",
+        "sm_netflow": 25577.58042739601,
+        "mcap": 1318731.0,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "ACtfUWtgvaXrQGNMiohTusi5jcx5RJf5zwu9aAxkpump",
+        "symbol": "UNC",
+        "mcap": 1806565.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-05",
+      "spike": {
+        "token": "68Nq68CrtLVpyvK5Un7UADiNczaGf39hBbj3diRsYj6D",
+        "symbol": "NEST",
+        "sm_netflow": 28342.75452209192,
+        "mcap": 4213820.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4SnKwnz6DyagftnFqdxsvWvehrcbEDhxmmXNQk2Jpump",
+        "symbol": "JOBY",
+        "mcap": 3549970.68213553,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-07",
+      "spike": {
+        "token": "2kcdBw85q4qMVCjUkEynTnZ3bGbBeCqZRDRNLpeWpump",
+        "symbol": "TRAINDOG",
+        "sm_netflow": 17942.483251476402,
+        "mcap": 1159944.92349173,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "rcVn9kGpyoFThqX8kUPUB3gNSrKdevvh9zT643tWTWh",
+        "symbol": "RCODE",
+        "mcap": 1221614.21908734,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-07",
+      "spike": {
+        "token": "JCKwsT8UAbygnFkZ7u3amDUM7BXRtwUhCsHQv2khpump",
+        "symbol": "CHANCE",
+        "sm_netflow": 10877.632286290424,
+        "mcap": 2158459.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4SnKwnz6DyagftnFqdxsvWvehrcbEDhxmmXNQk2Jpump",
+        "symbol": "JOBY",
+        "mcap": 2878283.74498749,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-10",
+      "spike": {
+        "token": "8wxkvAfEns76yBzu4MnbV7VnXWjg3iDPA9uwAQ6cpump",
+        "symbol": "SOLANGELES",
+        "sm_netflow": 15356.583015569116,
+        "mcap": 2182209.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "6ehEcTMCc85aNF4x9CWx8HuvWGhxQtvKdhKVf2HDpump",
+        "symbol": "TOESCOIN",
+        "mcap": 2049159.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-12",
+      "spike": {
+        "token": "Tqj8yFmagrg7oorpQkVGYR52r96RFTamvWfth9bpump",
+        "symbol": "KINS",
+        "sm_netflow": 16383.24555898355,
+        "mcap": 8150520.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "BCdwQBAn8dYB5YjTsoB6TdHAWokxv28k2oZUodERpump",
+        "symbol": "MANIFEST",
+        "mcap": 16458007.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-13",
+      "spike": {
+        "token": "FHi4YQN2mXrSG5SWZet2oND1w6PVeHkhRqSCheSxpump",
+        "symbol": "FOLK",
+        "sm_netflow": 10228.305753260116,
+        "mcap": 122526.742705565,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "3oBRGPMpvR1TpHRx9oMEeJwSgwv7Fo7ndshuu2rQpump",
+        "symbol": "POTATO",
+        "mcap": 117420.098658446,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-17",
+      "spike": {
+        "token": "CREDBHvVqREBCAxMihzr8D1nepHMr2gmQoZWpmgGmeta",
+        "symbol": "CRED",
+        "sm_netflow": 55619.559590091,
+        "mcap": 13083334.196924,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "9Pfync3ejPC9eHqVzq3nYQJAhyhjqpnB9UsaSfLxpump",
+        "symbol": "KET",
+        "mcap": 1710850.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-18",
+      "spike": {
+        "token": "SNDKbwMUQvZhnLnxLduradgLHG5KrPuKwpnrkkGRhfH",
+        "symbol": "SNDK",
+        "sm_netflow": 30792.8629054082,
+        "mcap": 1278501.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "FMqh9mqR6drPZqqW6wPqLHxX4rqNDWGhYLaMfoaJpump",
+        "symbol": "WORLD",
+        "mcap": 1415358.03243348,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-19",
+      "spike": {
+        "token": "4ko5tSr5o3H4v1sFtjTSd9MPUW7yx5AFCpkNPoL6pump",
+        "symbol": "FEBU",
+        "sm_netflow": 10390.721487235682,
+        "mcap": 1095661.0,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "9Pfync3ejPC9eHqVzq3nYQJAhyhjqpnB9UsaSfLxpump",
+        "symbol": "KET",
+        "mcap": 1089636.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-29",
+      "spike": {
+        "token": "9Pfync3ejPC9eHqVzq3nYQJAhyhjqpnB9UsaSfLxpump",
+        "symbol": "KET",
+        "sm_netflow": 12954.876510941769,
+        "mcap": 7424918.0,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "4MrsXQzaosYNyFd4wKDvgnC5xRtRqgXRrijFTGj9pump",
+        "symbol": "NORMIE",
+        "mcap": 6862702.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-31",
+      "spike": {
+        "token": "AzeNfRi7DX5HndH7dUgCxMD5sQPV7FPFH1cwDkoqpump",
+        "symbol": "KNIGHT",
+        "sm_netflow": 14617.217958293139,
+        "mcap": 1046625.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "8wxkvAfEns76yBzu4MnbV7VnXWjg3iDPA9uwAQ6cpump",
+        "symbol": "SOLANGELES",
+        "mcap": 1189231.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-07-31",
+      "spike": {
+        "token": "EmcxFTNVDqyLHp11NvwvLZ4D7LKGbG9i7B8RF7dwpump",
+        "symbol": "ZERO",
+        "sm_netflow": 10207.47558250139,
+        "mcap": 2283219.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4SnKwnz6DyagftnFqdxsvWvehrcbEDhxmmXNQk2Jpump",
+        "symbol": "JOBY",
+        "mcap": 2481808.83173568,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-01",
+      "spike": {
+        "token": "7z5KZpYj7BEnGKGCY3kDkaX32ueBSNp8QjvFq8Lxpump",
+        "symbol": "\u65fa\u65fa",
+        "sm_netflow": 20244.595906995914,
+        "mcap": 572970.838972726,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4ko5tSr5o3H4v1sFtjTSd9MPUW7yx5AFCpkNPoL6pump",
+        "symbol": "FEBU",
+        "mcap": 678591.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-04",
+      "spike": {
+        "token": "CFPkPq1eYPR8GLzEo59wUbbMioX4bshaTQiSGzTSpump",
+        "symbol": "MENSA",
+        "sm_netflow": 16102.116422327535,
+        "mcap": 1687530.93754377,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "3f9LEP4RNM1yq5VnCD1LYMvq7FZis5tfGqyZMsiRpump",
+        "symbol": "YOTS",
+        "mcap": 1885815.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-05",
+      "spike": {
+        "token": "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx",
+        "symbol": "STONK",
+        "sm_netflow": 10395.675844564765,
+        "mcap": 6803588.0,
+        "hits": 2,
+        "hits_1k": 2
+      },
+      "null": {
+        "token": "HcfnJxLov6tY8i1dq9uYRRZKCvxADPpovcfkyXzdpump",
+        "symbol": "CHONKETHA",
+        "mcap": 8649163.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-06",
+      "spike": {
+        "token": "Ge87EtsjwRQbHaqQmKRno69RFTwh9bfSsm99XNxTpump",
+        "symbol": "JIMOTHY",
+        "sm_netflow": 11349.892420832197,
+        "mcap": 3722534.0,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "HcfnJxLov6tY8i1dq9uYRRZKCvxADPpovcfkyXzdpump",
+        "symbol": "CHONKETHA",
+        "mcap": 9620965.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-09",
+      "spike": {
+        "token": "Ai66LHZG9MCzg1WKdawwqduVAXpNDUuV8M3uyq5ppump",
+        "symbol": "CATE",
+        "sm_netflow": 39647.38846788334,
+        "mcap": 20468811.6235493,
+        "hits": 3,
+        "hits_1k": 2
+      },
+      "null": {
+        "token": "6mJoQqcPEjiQ1hFya9oH6NBCQLhvS3mwVQWV9EcTHg9u",
+        "symbol": "TOMOCHI",
+        "mcap": 915009.0,
+        "hits": 1,
+        "hits_1k": 1
+      }
+    },
+    {
+      "day": "2026-08-13",
+      "spike": {
+        "token": "HxQhDGYqyjorgogMJx7YbBHADEDxuHhLnMMmr6VYpyn",
+        "symbol": "MANLET",
+        "sm_netflow": 12172.286906522146,
+        "mcap": 3892157.94992217,
+        "hits": 1,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "6f8ZQhxqfigdv7UszZ1rirbV7Sgv83s3rxv1N2Zopump",
+        "symbol": "DEALER",
+        "mcap": 2925635.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-16",
+      "spike": {
+        "token": "A13oRB9FFaiUjfi6LdCg6p9ka1u8SfGkUFs4SKvPpump",
+        "symbol": "TOAD",
+        "sm_netflow": 28173.10698966461,
+        "mcap": 5364529.4703942,
+        "hits": 3,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "4kjruqGHDsSqkMdFfCjV7Vb62HPFhtXyWc2t6JpQzDnz",
+        "symbol": "GTA6",
+        "mcap": 2829091.06644957,
+        "hits": 1,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-17",
+      "spike": {
+        "token": "9sfCHMLWSVy6MD6zr7pR1gD3qbT7C6K1E3dMf2ZBpump",
+        "symbol": "LAYOOO",
+        "sm_netflow": 25839.116596259642,
+        "mcap": 2747001.74837917,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "3t7sE6tF7oTSaPZLkSdmGyCVVMDAh6Q9taJddF2Hpump",
+        "symbol": "DYSON",
+        "mcap": 2834130.40109202,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-20",
+      "spike": {
+        "token": "7ssJZGFT3twGqeYA1kvpoMWwZYvMZvrMEbjRaWgg46BL",
+        "symbol": "BUTTHOLE",
+        "sm_netflow": 13190.170139238811,
+        "mcap": 1626488.89391629,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4kjruqGHDsSqkMdFfCjV7Vb62HPFhtXyWc2t6JpQzDnz",
+        "symbol": "GTA6",
+        "mcap": 1473535.79334244,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-22",
+      "spike": {
+        "token": "E3i7sTY5QYEBh3itepnomZQt7Eh5kzmHFk1vkm2pump",
+        "symbol": "CC",
+        "sm_netflow": 12069.632198814841,
+        "mcap": 4361663.35613538,
+        "hits": 2,
+        "hits_1k": 2
+      },
+      "null": {
+        "token": "94Sm8joZMSRzpQmcNVn5zZpgnRLN2DBesJYDXwuNpump",
+        "symbol": "OMO",
+        "mcap": 1229385.76548558,
+        "hits": 1,
+        "hits_1k": 1
+      }
+    },
+    {
+      "day": "2026-08-23",
+      "spike": {
+        "token": "GPzpoXpD74E2C4CJNayuoyBqPQJEsPtdse3nhntrpump",
+        "symbol": "LOOKSMAX",
+        "sm_netflow": 23257.155149220074,
+        "mcap": 1470471.87915087,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "94Sm8joZMSRzpQmcNVn5zZpgnRLN2DBesJYDXwuNpump",
+        "symbol": "OMO",
+        "mcap": 842893.988733865,
+        "hits": 1,
+        "hits_1k": 1
+      }
+    },
+    {
+      "day": "2026-08-24",
+      "spike": {
+        "token": "EkcTa8n14fXcHdfvZqCg72cTCutJnnKb19vcHwKTpump",
+        "symbol": "QENIS",
+        "sm_netflow": 20927.89831564717,
+        "mcap": 2607239.72291052,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "SiLVFMgD3eD2rgK628NbTBq9MnuJF5FW2CRaVyTB35L",
+        "symbol": "SILV",
+        "mcap": 6283127.05522285,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-24",
+      "spike": {
+        "token": "Hos282xmdMJHwMjhni91fNqdjDsgWjgSckxuGc1Bpump",
+        "symbol": "TOKEN",
+        "sm_netflow": 20324.681785905534,
+        "mcap": 976161.798453236,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "94Sm8joZMSRzpQmcNVn5zZpgnRLN2DBesJYDXwuNpump",
+        "symbol": "OMO",
+        "mcap": 786464.684881184,
+        "hits": 1,
+        "hits_1k": 1
+      }
+    },
+    {
+      "day": "2026-08-25",
+      "spike": {
+        "token": "ApZuxdpzMrbEYTGEzeY9afh5pj9d6qPRJCTgQYiipbKg",
+        "symbol": "CYBERLEEK",
+        "sm_netflow": 12003.56668541819,
+        "mcap": 10439015.8712398,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "SiLVFMgD3eD2rgK628NbTBq9MnuJF5FW2CRaVyTB35L",
+        "symbol": "SILV",
+        "mcap": 6211170.57485535,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-27",
+      "spike": {
+        "token": "7n8kRipxAQBfpGQtcGA2AbkM2HASSVCzqZ5F3QEopump",
+        "symbol": "ZOE",
+        "sm_netflow": 21262.45773319606,
+        "mcap": 4065341.10770207,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "SiLVFMgD3eD2rgK628NbTBq9MnuJF5FW2CRaVyTB35L",
+        "symbol": "SILV",
+        "mcap": 6213337.54926504,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-27",
+      "spike": {
+        "token": "BoTx8y9ynfdxf5ZjWtCoBVkff52qKA82ysaLU8ZM6d8T",
+        "symbol": "BOT",
+        "sm_netflow": 28975.27754388456,
+        "mcap": 1402311.16016135,
+        "hits": 1,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "CFPkPq1eYPR8GLzEo59wUbbMioX4bshaTQiSGzTSpump",
+        "symbol": "MENSA",
+        "mcap": 1283335.31338754,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-27",
+      "spike": {
+        "token": "HeeBovJNKd27tQ6xkeP1dfSyTr8LyLwhJz9wfFTbPLEX",
+        "symbol": "HEEBOO",
+        "sm_netflow": 20354.09745876981,
+        "mcap": 11331831.5142653,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "FtateF34Xzawa91bpbVNdX72hZYo9cymRDYqBreHHbJi",
+        "symbol": "PANTS",
+        "mcap": 1546713.33335965,
+        "hits": 2,
+        "hits_1k": 1
+      }
+    },
+    {
+      "day": "2026-08-28",
+      "spike": {
+        "token": "2NffKvfZTcFj2tyoY1Ev84PkqxA7DZnstyv6EwELpump",
+        "symbol": "SUE",
+        "sm_netflow": 16469.45874879481,
+        "mcap": 487077.166466739,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "Am8iBffqgaedfdK5XhtorbcRrKzwH9nyL3ySikQfpump",
+        "symbol": "KIMCHI",
+        "mcap": 521781.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-30",
+      "spike": {
+        "token": "zj1jpp7QMveWHLs61vL9KMZf254KvW7j4AAmBF8ry2k",
+        "symbol": "BULLSHIT",
+        "sm_netflow": 41307.14719342618,
+        "mcap": 3888782.09815854,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "udPEzBjbGMzYZbuLtByqLYhc4TEs6EebG8R7fwdpump",
+        "symbol": "TEXTIT",
+        "mcap": 4408285.08330379,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-08-31",
+      "spike": {
+        "token": "6dX5M8DY6VTFtVRX5yzWn9RE4MkJTyoAVbAodk6cpump",
+        "symbol": "GEOM",
+        "sm_netflow": 14697.577657157211,
+        "mcap": 896887.094157893,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "CARSsxWPkpQWvfyRBwfGMGvysJBHdHGfE46X5MNgmeta",
+        "symbol": "CARS",
+        "mcap": 844251.0,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-01",
+      "spike": {
+        "token": "GvUCjmWSXA5hrTh9smmNA1AU55YCtP9mDLQcrKA1pump",
+        "symbol": "WSOLP",
+        "sm_netflow": 13948.40703996193,
+        "mcap": 2705889.22941578,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "BcHEaaTCvycPwwsJ9yQTXdHP9X2gCLkznDbZ8VySpump",
+        "symbol": "JOTCHUA",
+        "mcap": 2125882.85956114,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-04",
+      "spike": {
+        "token": "CTPoyCwkjMvoJwU4xvZZqoD8tiYk6yDchySiN5gGpump",
+        "symbol": "FONE",
+        "sm_netflow": 115305.10990432155,
+        "mcap": 9305848.99807695,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "AMC1qwR9KhiyrQBRPrxnfo4JfMeMZqEBvt5tgTytNNoc",
+        "symbol": "AMC",
+        "mcap": 212204.010763351,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-07",
+      "spike": {
+        "token": "8RNUw4N655VSrZKuhGdywhbSMDTrheguFPfxbpE2NZHQ",
+        "symbol": "PURR",
+        "sm_netflow": 46152.883020507375,
+        "mcap": 5931898.94615584,
+        "hits": 1,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "SiLVFMgD3eD2rgK628NbTBq9MnuJF5FW2CRaVyTB35L",
+        "symbol": "SILV",
+        "mcap": 6136661.49112369,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-08",
+      "spike": {
+        "token": "CFNRDaxFcvRwRSNnA5cHrCCr6AHhk9dNkHWpRUjNupFL",
+        "symbol": "RAYCAT",
+        "sm_netflow": 19279.400447869586,
+        "mcap": 2003826.07801522,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "HeeBovJNKd27tQ6xkeP1dfSyTr8LyLwhJz9wfFTbPLEX",
+        "symbol": "HEEBOO",
+        "mcap": 1981239.6059,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-08",
+      "spike": {
+        "token": "EpXtn6xGoZ4Y45vRjiDUHSCGbBoJD5FaEqZbF98YswH1",
+        "symbol": "MADE",
+        "sm_netflow": 23078.315447190293,
+        "mcap": 706027.633387356,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg",
+        "symbol": "NKE",
+        "mcap": 675453.716421486,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-09",
+      "spike": {
+        "token": "EbT2jpoeRJVFNWAFJE97EGfQF3iwHsEY8sh17fGbL5ER",
+        "symbol": "ZDOG",
+        "sm_netflow": 13079.112610770986,
+        "mcap": 750535.164589286,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "DUZN7M6ezXez9UVrou4N8UEGRkwnbWmXqqZgEKiZCrnN",
+        "symbol": "MARKET",
+        "mcap": 804051.886999804,
+        "hits": 1,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-09",
+      "spike": {
+        "token": "HooDYv5RewLRiMLnEVq3VJqdqxhuE6c5eYvqejMC3e9A",
+        "symbol": "HOOD",
+        "sm_netflow": 19993.16655162586,
+        "mcap": 683362.101286933,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "oPAiAikWTaFj9RYoRFD35ccfwhnMcB3ThgBZRHSkjTZ",
+        "symbol": "TOPENAI",
+        "mcap": 606304.743879149,
+        "hits": 1,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-10",
+      "spike": {
+        "token": "8K5X85PAJHAAVSvYaAzgVPPAPsqqHmvx16ZyBiscYF8L",
+        "symbol": "CTO",
+        "sm_netflow": 24555.15178256287,
+        "mcap": 2694502.18772137,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "poNSfquKq512ApeYjVghwViSun4x1MhCqHVH2Paq4jN",
+        "symbol": "PONS",
+        "mcap": 956618.968875585,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-10",
+      "spike": {
+        "token": "XkeTXo1125vz5H9svJpGiw4JvLbN8VmMu9cmMvspump",
+        "symbol": "DREGG",
+        "sm_netflow": 13861.579288623892,
+        "mcap": 1769031.26434537,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "storenSbvkfzircixnaosc5CbzNZVrHJ6S3EKrS1yqR",
+        "symbol": "STORE",
+        "mcap": 1907334.29141221,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-11",
+      "spike": {
+        "token": "C5nG72gUFJz6wewcgTPjcBmpSq4BwFLHy5j8heo9d7rZ",
+        "symbol": "USDC",
+        "sm_netflow": 14102.241969233615,
+        "mcap": 323901.018755631,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "LLYuwZ33keFihgwoxXsBawy31AiRFLFSva32TYq5TvD",
+        "symbol": "LLY",
+        "mcap": 329303.898546654,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-11",
+      "spike": {
+        "token": "CB1YQfUzgsnaCd93cZLdiX1uASW7utWBaYMUsvcwNUBV",
+        "symbol": "LOOM",
+        "sm_netflow": 33762.642167452796,
+        "mcap": 2274405.70509692,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "HeeBovJNKd27tQ6xkeP1dfSyTr8LyLwhJz9wfFTbPLEX",
+        "symbol": "HEEBOO",
+        "mcap": 1993766.79535,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-11",
+      "spike": {
+        "token": "PerPsCe2SJ7Q25CN4R5TTX4fmBdmknE2hQmqCt96fHL",
+        "symbol": "PERPSPAD",
+        "sm_netflow": 13724.567196982978,
+        "mcap": 1063390.45793737,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "DRAMjSWR7HRfJKjRkvQWYL2bcaejaVhuxEcjf4pAY4Cw",
+        "symbol": "DRAM",
+        "mcap": 934446.478354851,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-12",
+      "spike": {
+        "token": "FFT4bgyrvzyB5TKAziLkAzBj8mboduzJeDdZ27TU4FHm",
+        "symbol": "DEX",
+        "sm_netflow": 10514.266067044628,
+        "mcap": 1486654.10210166,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "HeeBovJNKd27tQ6xkeP1dfSyTr8LyLwhJz9wfFTbPLEX",
+        "symbol": "HEEBOO",
+        "mcap": 1996574.71455,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-13",
+      "spike": {
+        "token": "GhuEi5AWtZaWuAda4ysJwMTzU8oMdjiL1bz6eziptT2p",
+        "symbol": "FROGE",
+        "sm_netflow": 11874.748817083015,
+        "mcap": 774607.864920244,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "4ChT49V1iazP2XUGtycGkEsS6pRMqvGfUbqvRC9Z91ZT",
+        "symbol": "MOS",
+        "mcap": 752897.110473681,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-14",
+      "spike": {
+        "token": "8RVBk8vxLiUHueLUW1f4izFVqN3nWippLhkohKg6EGkS",
+        "symbol": "KNOTS",
+        "sm_netflow": 46934.68389751391,
+        "mcap": 22181057.91,
+        "hits": 2,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "6V7cF52p3eSkRuoVXnAryWVwoyS775DERenYPMMYBPxS",
+        "symbol": "POINTFARMC",
+        "mcap": 1389201.752536,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-14",
+      "spike": {
+        "token": "ZesMGYmokFiEuDvNzWeMhB7jxF6eUW8c512vwSKSTNK",
+        "symbol": "\ud83c\udf92",
+        "sm_netflow": 56797.26434217994,
+        "mcap": 1352307.68393859,
+        "hits": 1,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "DoGEV7LASBkQbibMc5k5vKnTZoMg423GpJ5QtJEGfm7R",
+        "symbol": "DOGE",
+        "mcap": 639641.220584562,
+        "hits": 4,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-15",
+      "spike": {
+        "token": "DkPQvrx7CDYrL4HfHijz6GqZLYm7Pd4rm1kTiumLFwhS",
+        "symbol": "STONKCAT",
+        "sm_netflow": 40549.464766099474,
+        "mcap": 853881.42120837,
+        "hits": 2,
+        "hits_1k": 2
+      },
+      "null": {
+        "token": "zj1jpp7QMveWHLs61vL9KMZf254KvW7j4AAmBF8ry2k",
+        "symbol": "BULLSHIT",
+        "mcap": 675044.352814853,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-15",
+      "spike": {
+        "token": "GWTP6M5bxhaJ1k2Kxvf8hhYaHE6jZMhh4cKzFuCpnc83",
+        "symbol": "USEFUL",
+        "sm_netflow": 11388.715144512895,
+        "mcap": 1619982.54224021,
+        "hits": 1,
+        "hits_1k": 1
+      },
+      "null": {
+        "token": "6V7cF52p3eSkRuoVXnAryWVwoyS775DERenYPMMYBPxS",
+        "symbol": "POINTFARMC",
+        "mcap": 1312559.1633058,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-15",
+      "spike": {
+        "token": "MukLDtJ8Cx9DxLbeyLRSWPSposTMWuwHANbuaudpump",
+        "symbol": "OTC",
+        "sm_netflow": 59231.04787194245,
+        "mcap": 3147566.06494032,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "E4Ap4icMLwKot8rkkTbq5JkS5kZxt5XCE3yfxbzYBjHx",
+        "symbol": "BTC",
+        "mcap": 4219257.91265996,
+        "hits": 0,
+        "hits_1k": 0
+      }
+    },
+    {
+      "day": "2026-09-15",
+      "spike": {
+        "token": "bykrhkExmjWco2mFxKGX3XPmPVaZB9JJp9MkRe8pump",
+        "symbol": "SHREK",
+        "sm_netflow": 11476.271716542225,
+        "mcap": 435708.454848609,
+        "hits": 0,
+        "hits_1k": 0
+      },
+      "null": {
+        "token": "PreZad18qfPtbxNpMtMuAuX2zVpvkEU8DnJx56faCWd",
+        "symbol": "FIGUREAI",
+        "mcap": 479732.155461928,
+        "hits": 1,
+        "hits_1k": 0
+      }
+    }
+  ],
+  "params": {
+    "ONSET_FROM": "2026-07-03",
+    "ONSET_TO": "2026-09-15",
+    "ONSET_MIN_USD": 10000.0,
+    "QUIET_MAX_USD": 5000.0,
+    "MIN_AGE_DAYS": 8,
+    "WINDOW_DAYS": 7,
+    "CAP_SPIKES": 100,
+    "SEED": 20260923,
+    "IQR_FLOOR": 5,
+    "SCREEN_FILTERS": {
+      "market_cap_usd": {
+        "min": 100000,
+        "max": 25000000
+      },
+      "token_age_days": {
+        "min": 3,
+        "max": 90
+      }
+    }
+  },
+  "redacted": "wallet identities removed; per-pair hit counts only (wallet x token x day would de-anonymise)"
+}

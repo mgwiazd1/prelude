@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+out/
+*.db
+.env
+# private operator roster — NEVER committed (exchange/public-figure example is committed)
+data/roster.json
+# runtime state (global Nansen queue)
+prelude_nansen.lock
+prelude_nansen.lock.state
+data/probes/
+data/pseudonyms.json

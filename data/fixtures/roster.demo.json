@@ -1,0 +1,7 @@
+{
+  "roster": [
+    {"address": "0xDE00000000000000000000000000000000000001", "chain": "robinhood", "tier": "operator", "tier_weight": 1.0, "source": "SYNTHETIC demo wallet (not a real address)"},
+    {"address": "DemoSyntheticWa11et1111111111111111111111111", "chain": "solana", "tier": "smart_money", "tier_weight": 0.8, "source": "SYNTHETIC demo wallet (not a real address)"},
+    {"address": "0xDE00000000000000000000000000000000000003", "chain": "bnb", "tier": "related", "tier_weight": 0.5, "source": "SYNTHETIC demo wallet (not a real address)"}
+  ]
+}

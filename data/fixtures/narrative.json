@@ -1,0 +1,17 @@
+{
+  "onsets": [
+    {
+      "slug": "rhc-sol-green",
+      "token": "0x42af...",
+      "chain": "robinhood",
+      "t_onset": "2026-09-21T18:00:00Z",
+      "t_confirm": "2026-09-22T00:00:00Z",
+      "z_narr": 2.8,
+      "rank": 8,
+      "moni_change": 3.4,
+      "quiet_at_prev_snapshot": true,
+      "quiet_at_prev_snapshot_note": "rank 61, |moni_change| 0.3 at 2026-09-21T06:00 — quiet at t_hi",
+      "baseline": {"typical_move_usd": 5000.0, "note": "demo-only: 7d typical |Δ|usd for this token (production computes from history)"}
+    }
+  ]
+}

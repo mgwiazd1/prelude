@@ -1,0 +1,98 @@
+{
+  "snapshots": [
+    {
+      "ts": "2026-09-20T06:00:00Z",
+      "balances": {
+        "0xDE00000000000000000000000000000000000001": [
+          {
+            "token": "0x0000000000000000000000000000000000000001",
+            "symbol": "USDT",
+            "value_usd": 50000.0,
+            "price_usd": 1.0,
+            "token_amount": 50000.0,
+            "chain": "robinhood"
+          }
+        ],
+        "DemoSyntheticWa11et1111111111111111111111111": [
+          {
+            "token": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wHGyojB2kJSCX",
+            "symbol": "USDC",
+            "value_usd": 45000.0,
+            "price_usd": 1.0,
+            "token_amount": 45000.0,
+            "chain": "solana"
+          },
+          {
+            "token": "So11111111111111111111111111111111111111112",
+            "symbol": "SOL",
+            "value_usd": 8000.0,
+            "price_usd": 165.4,
+            "token_amount": 48.37,
+            "chain": "solana"
+          }
+        ],
+        "0xDE00000000000000000000000000000000000003": [
+          {
+            "token": "0x000000000000000000000000000000000000dead",
+            "symbol": "BNB",
+            "value_usd": 3000.0,
+            "price_usd": 585.0,
+            "token_amount": 5.13,
+            "chain": "bnb"
+          }
+        ]
+      }
+    },
+    {
+      "ts": "2026-09-21T06:00:00Z",
+      "balances": {
+        "0xDE00000000000000000000000000000000000001": [
+          {
+            "token": "0x0000000000000000000000000000000000000001",
+            "symbol": "USDT",
+            "value_usd": 31500.0,
+            "price_usd": 1.0,
+            "token_amount": 31500.0,
+            "chain": "robinhood"
+          },
+          {
+            "token": "0x42af...",
+            "symbol": "SCHIFFY",
+            "value_usd": 18500.0,
+            "price_usd": 2.42,
+            "token_amount": 7644.63,
+            "chain": "robinhood"
+          }
+        ],
+        "DemoSyntheticWa11et1111111111111111111111111": [
+          {
+            "token": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wHGyojB2kJSCX",
+            "symbol": "USDC",
+            "value_usd": 44200.0,
+            "price_usd": 1.0,
+            "token_amount": 44200.0,
+            "chain": "solana"
+          },
+          {
+            "token": "So11111111111111111111111111111111111111112",
+            "symbol": "SOL",
+            "value_usd": 8400.0,
+            "price_usd": 169.0,
+            "token_amount": 49.7,
+            "chain": "solana"
+          }
+        ],
+        "0xDE00000000000000000000000000000000000003": [
+          {
+            "token": "0x000000000000000000000000000000000000dead",
+            "symbol": "BNB",
+            "value_usd": 3100.0,
+            "price_usd": 602.0,
+            "token_amount": 5.15,
+            "chain": "bnb"
+          }
+        ]
+      }
+    }
+  ]
+}
