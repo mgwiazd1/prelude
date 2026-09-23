@@ -262,3 +262,40 @@ def test_redact_coarsens_dates_and_sizes(tmp_path):
     raw = redact.redact_check(res, redact.Pseudonyms(str(tmp_path / "p.json")),
                               coarsen=False)
     assert "$678" in check.render(raw)
+
+
+def test_censored_entry_never_renders_as_real_entry(tmp_path):
+    from prelude import redact
+    conn, rpath = _seed(tmp_path)
+    _cov(conn, S, C1)
+    _hist(conn, C1, "CENS", "2026-06-25T23:59:59", 500.0)   # held at history start
+    _hist(conn, S, "CENS", "2026-08-18T23:59:59", 700.0)
+    res = check.check_token(conn, "CENS", roster_path=rpath)
+    assert res["lead_claim"] == "lower_bound" and res["censored"]["cohort"] is True
+    for r in (res, redact.redact_check(res, redact.Pseudonyms(str(tmp_path / "p.json")))):
+        out = check.render(r)
+        coh = [l for l in out.splitlines() if l.startswith(("entry", "prov"))]
+        assert all("cohort@" not in l or "censored@history-start" in l.split("cohort@")[1]
+                   for l in coh if l.startswith("entry"))
+        assert "cohort-entry=backfill(censored@history-start)" in out
+        assert "cohort-entry=backfill(real-entry)" not in out
+        assert "lead_claim=lower_bound" in out and "LEAD CLAIM VALID" not in out
+        assert "[LEAD CLAIM: LOWER BOUND]" in out
+    # uncensored claim keeps the exact label
+    ok = check.render(check.check_token(conn, "SIGLD", roster_path=rpath))
+    assert "lead_claim=valid" in ok and "censored" not in ok
+
+
+def test_tied_earliest_entry_is_deterministic_largest(tmp_path):
+    import json as _j
+    C2 = "cohWallet2"
+    conn, rpath = _seed(tmp_path)
+    r = _j.load(open(rpath))
+    r["roster"].append({"address": C2, "name": "Cohort2", "chain": "solana", "status": "active"})
+    _j.dump(r, open(rpath, "w"))
+    _hist(conn, S, "TIE", "2026-08-10T23:59:59", 50.0)
+    _hist(conn, C1, "TIE", "2026-08-03T23:59:59", 1500.0)
+    _hist(conn, C2, "TIE", "2026-08-03T23:59:59", 43000.0)     # same day, larger
+    res = check.check_token(conn, "TIE", roster_path=rpath)
+    assert res["entry_size"]["cohort"]["address"] == C2
+    assert res["entry_size"]["cohort"]["entry_usd"] == 43000.0

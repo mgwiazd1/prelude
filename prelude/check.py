@@ -149,8 +149,11 @@ def check_token(conn, token, roster_path=None):
     # bound, daily resolution) + peak position (upper bound). Always printed
     # with the verdict — no lead claim renders without its magnitude.
     def _size_for(popname, ts, src):
-        addrs = [a for a in all_addrs if pop(a) == popname]
+        # sorted: all_addrs is a set, and string-set order is randomised per
+        # process — tied entries rendered a different wallet/size per run
+        addrs = sorted(a for a in all_addrs if pop(a) == popname)
         if src == "backfill":
+            best = None
             for a in addrs:
                 if bf_first.get(a) == ts:
                     d1 = conn.execute(
@@ -161,11 +164,15 @@ def check_token(conn, token, roster_path=None):
                         "SELECT MAX(value_usd) FROM balance_history "
                         "WHERE address=? AND token=? AND value_usd>0",
                         (a, address)).fetchone()
-                    if d1 is not None:
-                        return {"wallet": (roster.get(a) or {}).get("name", a[:6]),
+                    # ties at the earliest entry: the LARGEST entry states
+                    # "this side entered with at least $X" (tie-break: address)
+                    if d1 is not None and (best is None or d1[0] > best["entry_usd"]):
+                        best = {"wallet": (roster.get(a) or {}).get("name", a[:6]),
                                 "address": a, "entry_usd": round(d1[0], 2),
                                 "peak_usd": round(pk[0], 2) if pk
                                               else round(d1[0], 2)}
+            if best:
+                return best
         elif src == "snapshot":
             best = min((snap_first[a][0] for a in addrs if a in snap_first))
             for a in addrs:
@@ -250,6 +257,9 @@ def check_token(conn, token, roster_path=None):
         "resolved": {"symbol": symbol, "address": address, "chain": chain},
         "verdict": verdict,
         "lead_claim_valid": lead_ok,
+        # rendered form: a censored side makes the claim a MINIMUM, not exact
+        "lead_claim": ("lower_bound" if lead_ok and (sig_cens or coh_cens)
+                       else "valid" if lead_ok else "none"),
         "lead_hours": lead_hours,
         # one side held before history starts: order valid, lead is a minimum
         "lead_is_lower_bound": bool(lead_ok and (sig_cens or coh_cens)),
@@ -301,7 +311,11 @@ def _usd(v):
     return v if isinstance(v, str) else f"${v:,.0f}"
 
 
-def _prov_word(p):
+def _prov_word(p, censored=False):
+    # a left-censored backfill entry is "already held when history starts" —
+    # it must never be labelled a real entry
+    if p == "backfill" and censored:
+        return "backfill(censored@history-start)"
     return {"backfill": "backfill(real-entry)",
             "snapshot": "snapshot-order(poller-start)",
             "none": "absent"}[p]
@@ -316,15 +330,18 @@ def render(res):
         return "\n".join(lines)
 
     e = res["entry"]
+    cens = res.get("censored") or {}
     v = res["verdict"]
     lead = res.get("lead_hours")
     ge = ">=" if res.get("lead_is_lower_bound") else ""
+    tag = ("[LEAD CLAIM: LOWER BOUND]" if res.get("lead_claim") == "lower_bound"
+           else "[LEAD CLAIM VALID]")
     if v == "SIGNAL_LEAD":
         lines.append(f"verdict SIGNAL_LEAD — signal entered {ge}{lead}h before the "
-                     "tracked cohort  [LEAD CLAIM VALID]")
+                     f"tracked cohort  {tag}")
     elif v == "COHORT_LEAD":
         lines.append(f"verdict COHORT_LEAD — cohort entered {ge}{abs(lead)}h before "
-                     "any signal wallet  [LEAD CLAIM VALID]")
+                     f"any signal wallet  {tag}")
     elif v == "CONCURRENT":
         lines.append(f"verdict CONCURRENT — signal and cohort entered within "
                      f"~1h of each other (lead={lead}h, backfill-sourced)")
@@ -344,9 +361,9 @@ def render(res):
             lines.append("          (snapshot-order times are poller START, not entry)")
 
     lines.append(f"entry   signal@{e['signal_first']['ts'][:10] if e['signal_first']['ts'] else '—'}"
-                 f" ({_prov_word(e['signal_first']['source'])})  "
+                 f" ({_prov_word(e['signal_first']['source'], cens.get('signal'))})  "
                  f"cohort@{e['cohort_first']['ts'][:10] if e['cohort_first']['ts'] else '—'}"
-                 f" ({_prov_word(e['cohort_first']['source'])})")
+                 f" ({_prov_word(e['cohort_first']['source'], cens.get('cohort'))})")
     sz = res.get("entry_size") or {}
     def _sz_word(s):
         if not s:
@@ -386,8 +403,8 @@ def render(res):
         et = t["entry_ts"][:10] if t["entry_ts"] else ""
         lines.append(f"  [{tag}] {t['wallet']:<22} {_usd(t['peak_usd']):>11}  "
                      f"entry@{src:<4} {et}")
-    lines.append(f"prov    signal-entry={_prov_word(res['provenance']['signal'])}"
-                 f"  cohort-entry={_prov_word(res['provenance']['cohort'])}"
-                 f"  lead_claim_valid={res['lead_claim_valid']}")
+    lines.append(f"prov    signal-entry={_prov_word(res['provenance']['signal'], cens.get('signal'))}"
+                 f"  cohort-entry={_prov_word(res['provenance']['cohort'], cens.get('cohort'))}"
+                 f"  lead_claim={res.get('lead_claim', 'none')}")
     lines.append("note    " + res["note"])
     return "\n".join(lines)
