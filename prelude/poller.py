@@ -44,7 +44,11 @@ def load_roster(path=None):
     return out
 
 
-def snapshot_all(client=None, conn=None, roster=None, ts=None):
+def _short(a):
+    return f"{a[:6]}…{a[-4:]}" if len(a) > 12 else a
+
+
+def snapshot_all(client=None, conn=None, roster=None, ts=None, live_view=False):
     """One snapshot pass over the active roster. Returns (n_wallets, credits).
 
     The pass gets ONE snapshot_id (monotonic, from the snapshots table) —
@@ -82,6 +86,10 @@ def snapshot_all(client=None, conn=None, roster=None, ts=None):
         try:
             data = client.current_balance(w["address"], w["chain"])
         except (RuntimeError, httpx.HTTPStatusError) as e:
+            if live_view:
+                print(f"  POST /api/v1/profiler/address/current-balance  "
+                      f"{client.last_status or 'ERR'}  {w['chain']:<9} "
+                      f"{_short(w['address'])}  -> dead-letter: {str(e)[:60]}")
             # failure table: 422/5xx per-object dead-letter (5xx after its 1 retry)
             # — pass continues. A failed call NEVER writes a row (not even an
             # empty marker), so it cannot be confused with a verified-empty 200.
@@ -89,6 +97,14 @@ def snapshot_all(client=None, conn=None, roster=None, ts=None):
             print(f"[poller] dead-letter {w.get('name', w['address'])[:12]}…: {e}")
             continue
         rows = data.get("data", []) or []
+        if live_view:
+            top = max(rows, key=lambda r: float(r.get("value_usd") or 0), default=None)
+            top_s = (f"  top {top.get('token_symbol') or top.get('symbol')} "
+                     f"${float(top.get('value_usd') or 0):,.0f}") if top else ""
+            print(f"  POST /api/v1/profiler/address/current-balance  "
+                  f"{client.last_status}  {client.last_cost or '?'} credit  "
+                  f"{len(rows):>3} rows  {w['chain']:<9} {_short(w['address'])}"
+                  f"  {client.last_ms}ms{top_s}")
         for r in rows:
             conn.execute(
                 "INSERT OR REPLACE INTO balance_snapshots"

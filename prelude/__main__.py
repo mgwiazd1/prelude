@@ -12,8 +12,14 @@ def main(argv=None):
         run()
     elif cmd == "snapshot":
         try:
-            from .poller import snapshot_all
-            snapshot_all()
+            import os  # main() imports os per-branch, so it is function-local
+            from . import poller
+            live = "--live-view" in argv
+            if live:
+                r = poller.load_roster()
+                print(f"[live] roster file: {os.path.relpath(poller.ROSTER_PATH)} "
+                      f"({len(r)} wallets) · caller=prelude · every call metered")
+            poller.snapshot_all(live_view=live)
         except RuntimeError as e:
             print(f"prelude: {e}")
             sys.exit(1)

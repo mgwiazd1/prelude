@@ -114,6 +114,8 @@ class NansenClient:
         self.client = httpx.Client(timeout=30)
         self.credits_remaining = None
         self.last_cost = None  # X-Nansen-Credits-Cost of the last response
+        self.last_status = None
+        self.last_ms = None
 
     def _post(self, endpoint, payload, _retry=1):
         note = str((payload or {}).get("context_note") or "")
@@ -151,6 +153,7 @@ class NansenClient:
             raise RuntimeError(f"{type(r).__name__} {endpoint} after retry") from r
         self.credits_remaining = int(r.headers.get("x-nansen-credits-remaining") or 0) or None
         self.last_cost = r.headers.get("x-nansen-credits-cost")
+        self.last_status, self.last_ms = r.status_code, dur
         api_usage.log_api_call(
             "nansen", endpoint, self.caller, http_status=r.status_code,
             duration_ms=dur, units=CREDIT_COST.get(endpoint, 1), unit_kind="credits",

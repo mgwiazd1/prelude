@@ -134,3 +134,12 @@ def test_real_roster_no_bad_addresses():
     addrs = [w["address"] for w in roster if w.get("status", "active") == "active"]
     assert all(a == a.strip() and 0 < len(a) < 46 for a in addrs)
     assert len(addrs) == len(set(addrs)), "active roster has duplicate addresses"
+
+
+def test_cli_snapshot_live_view_no_unbound_os(monkeypatch, capsys):
+    # main() imports os per-branch (function-local name); the snapshot branch
+    # must bind it too or --live-view dies with UnboundLocalError on camera
+    from prelude import __main__ as cli, poller as pl
+    monkeypatch.setattr(pl, "snapshot_all", lambda live_view=False: (0, None))
+    cli.main(["snapshot", "--live-view"])
+    assert "[live] roster file:" in capsys.readouterr().out
