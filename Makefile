@@ -1,4 +1,4 @@
-.PHONY: demo run test
+.PHONY: demo run test site
 
 demo:
 	python3 -m prelude demo
@@ -8,3 +8,6 @@ run:
 
 test:
 	python3 -m pytest tests/ -q
+
+site:
+	python3 -m prelude site

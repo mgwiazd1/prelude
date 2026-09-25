@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="dark">
+<title>Prelude: the control caught it</title>
+<meta name="description" content="We thought our wallets got in early. The control caught that it was an artifact. 1.8× vs 4.5×, n=56.">
+<style>
+:root{color-scheme:dark;--bg:#0e1116;--panel:#161b22;--ink:#e6edf3;--mute:#9da7b3;--line:#2d333b;--spike:#e3b341;--null:#6e7681;--accent:#58a6ff}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:720px;margin:0 auto;padding:28px 16px 48px}
+h1{font-size:clamp(1.45rem,4.6vw,2.1rem);line-height:1.2;margin:0 0 22px;letter-spacing:-.01em}
+h2{font-size:1.05rem;margin:30px 0 8px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.toggle{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.toggle button{flex:1 1 220px;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:inherit;font-size:.92rem;cursor:pointer;text-align:left}
+.toggle button[aria-pressed=true]{border-color:var(--accent);background:#1f2a37}
+.toggle small{display:block;color:var(--mute);font-size:.8rem}
+svg{width:100%;height:auto;display:block}
+.spike{fill:var(--spike)}.null{fill:var(--null)}
+rect{transition:y .7s cubic-bezier(.2,.8,.2,1),height .7s cubic-bezier(.2,.8,.2,1)}
+text{fill:var(--ink);font-size:13px}.val{font-weight:700;font-size:15px;transition:y .7s cubic-bezier(.2,.8,.2,1)}
+.axis{fill:var(--mute);font-size:11px}.cat{fill:var(--mute);font-size:13px}.grid{stroke:var(--line);stroke-width:1}
+.ghost{stroke:var(--mute);stroke-width:2;stroke-dasharray:4 3;transition:y1 .7s,y2 .7s}.ghost-t{fill:var(--mute);font-size:11px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.stat{border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}.stat b{display:block;font-size:clamp(.95rem,4.2vw,1.35rem);line-height:1.25;overflow-wrap:normal}.stat i{display:block;font-style:normal;font-weight:600;font-size:.85rem;color:var(--mute)}.stat span{color:var(--mute);font-size:.8rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:12px}td,th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left}th{color:var(--mute);font-weight:600}
+ol{padding-left:1.2em;margin:0}li{margin:4px 0}code{background:#1f242c;border-radius:4px;padding:1px 5px;font-size:.88em}
+a{color:var(--accent)}.links a{margin-right:18px;display:inline-block;margin-bottom:6px}.mute{color:var(--mute);font-size:.88rem}
+.js-only{display:none}.js .js-only{display:flex}.js .no-js{display:none}
+@media (prefers-reduced-motion:reduce){rect,.val,.ghost{transition:none}}
+</style>
+</head><body><main>
+<h1>We thought our wallets got in early. The control caught that it was an artifact.</h1>
+
+<section class="panel" aria-label="Results">
+  <div class="toggle js-only" role="group" aria-label="Null control"><button type="button" data-k="age" aria-pressed="true">Age-matched<small>added after seeing results</small></button><button type="button" data-k="mcap" aria-pressed="false">Market-cap matched<small>pre-registered</small></button></div>
+  <svg id="chart" viewBox="0 0 430 250" role="img" aria-labelledby="chart-title chart-desc" data-ymax="28"><title id="chart-title">Spike vs null hits, age-matched control</title><desc id="chart-desc">18 of 56 spike tokens had a roster hit, versus 10 of 56 age-matched null tokens. Lift 1.8×, p = 0.13, not significant.</desc><line class="grid" x1="34" x2="422" y1="214.0" y2="214.0"/><text class="axis" x="28" y="218.0" text-anchor="end">0</text><line class="grid" x1="34" x2="422" y1="168.0" y2="168.0"/><text class="axis" x="28" y="172.0" text-anchor="end">7</text><line class="grid" x1="34" x2="422" y1="122.0" y2="122.0"/><text class="axis" x="28" y="126.0" text-anchor="end">14</text><line class="grid" x1="34" x2="422" y1="76.0" y2="76.0"/><text class="axis" x="28" y="80.0" text-anchor="end">21</text><line class="grid" x1="34" x2="422" y1="30.0" y2="30.0"/><text class="axis" x="28" y="34.0" text-anchor="end">28</text><rect id="b-spike" class="spike" x="89" y="95.7" width="70" height="118.3" rx="3"/><text id="b-spike-v" class="val" x="124.0" y="89.7" text-anchor="middle">18/56</text><rect id="b-null" class="null" x="219" y="148.3" width="70" height="65.7" rx="3"/><text id="b-null-v" class="val" x="254.0" y="142.3" text-anchor="middle">10/56</text><line id="ghost" class="ghost" x1="211" x2="297" y1="187.7" y2="187.7"/><text id="ghost-t" class="ghost-t" x="299" y="191.7">market-cap null</text><text class="cat" x="124.0" y="238" text-anchor="middle">spike tokens</text><text class="cat" x="254.0" y="238" text-anchor="middle">null tokens</text><text class="axis" x="34" y="16" text-anchor="start">hits (of 56 pairs)</text></svg>
+  <div class="stats" aria-live="polite">
+    <div class="stat"><b id="s-lift">1.8×</b><span>lift</span></div>
+    <div class="stat"><b id="s-p">0.13<i id="s-pq">, not significant</i></b><span>p (Fisher)</span></div>
+    <div class="stat"><b id="s-n">56 pairs</b><span>n</span></div>
+  </div>
+  <p class="mute" style="margin:10px 0 0">Showing: <span id="s-ctl">Age-matched (added after seeing results)</span>.
+  Dashed line: the other control's null hits.</p>
+  <table class="no-js"><thead><tr><th>Null control</th><th>Spike hits</th><th>Null hits</th><th>Lift</th><th>p (Fisher)</th></tr></thead>
+  <tbody><tr><td>Age-matched <span class="mute">(added after seeing results)</span></td><td>18/56</td><td>10/56</td><td>1.8×</td><td>0.13, not significant</td></tr><tr><td>Market-cap matched <span class="mute">(pre-registered)</span></td><td>18/56</td><td>4/56</td><td>4.5×</td><td>0.002</td></tr></tbody></table>
+</section>
+
+<h2>What we tested</h2>
+<p>We tested whether a private roster of 45 Solana operator wallets bought tokens in the 7 days before Nansen smart-money netflow onsets more often than matched quiet tokens on the same day: 56 pairs over 90 days. Against the pre-registered market-cap-matched null the roster looked early, 18/56 vs 4/56 (4.5×). Matching on token age instead, a control we added after seeing that result, the lift falls to 1.8× (18/56 vs 10/56, p = 0.13, not significant): the roster buys young tokens, and young tokens are where onsets happen. What is left is concentrated in two wallets; without them the age-matched lift is 1.0× (8/56 vs 8/56). This covers this cohort only and says nothing about smart money in general.</p>
+
+<h2>How it works</h2>
+<ol>
+<li><b>Onset:</b> the first day a token's Nansen smart-money netflow reaches $10k after a quiet week.</li>
+<li><b>Hit:</b> a roster wallet's token amount rose in the 7 days before the onset, read from stored 90-day balance history.</li>
+<li><b>Null:</b> a quiet token on the same day, matched on market cap (pre-registered) or token age (post hoc), same window and hit rule.</li>
+<li><b>Lift</b> = spike hit rate ÷ null hit rate; p from Fisher's exact test. Median lead 120h, set by the 7-day window.</li>
+</ol>
+<p class="mute">Nansen endpoints used: <code>token-screener/historical</code> (<code>trader_type=sm</code>, the onset clock),
+<code>profiler/address/historical-balances</code> (entry history), <code>profiler/address/current-balance</code> (live snapshots).</p>
+
+<h2>Links</h2>
+<p class="links"><a href="https://github.com/mgwiazd1/prelude">Repository</a><a href="https://github.com/mgwiazd1/prelude#readme">README</a><a href="https://github.com/mgwiazd1/prelude#quick-start">Run <code>make demo</code></a></p>
+<p class="mute">Wallet identities are not published. Built for the Nansen Meridian Buildathon.</p>
+</main>
+<script type="application/json" id="site-data">{"age": {"label": "Age-matched", "note": "added after seeing results", "spike": 18, "null": 10, "lift": "1.8×", "p": "0.13, not significant", "n": 56}, "mcap": {"label": "Market-cap matched", "note": "pre-registered", "spike": 18, "null": 4, "lift": "4.5×", "p": "0.002", "n": 56}}</script>
+<script>
+(function(){
+  document.documentElement.className='js';
+  var V=JSON.parse(document.getElementById('site-data').textContent), svg=document.getElementById('chart');
+  var ymax=+svg.getAttribute('data-ymax'), TOP=30, PH=184;
+  function y(v){return TOP+PH*(1-v/ymax);}
+  function setBar(id,v,n){var r=document.getElementById(id),t=document.getElementById(id+'-v'),yy=y(v);
+    r.setAttribute('y',yy.toFixed(1));r.setAttribute('height',(TOP+PH-yy).toFixed(1));t.setAttribute('y',(yy-6).toFixed(1));t.textContent=v+'/'+n;}
+  function show(k){var v=V[k],o=V[k==='age'?'mcap':'age'];
+    setBar('b-spike',v.spike,v.n);setBar('b-null',v['null'],v.n);
+    var g=document.getElementById('ghost'),gt=document.getElementById('ghost-t'),gy=y(o['null']);
+    g.setAttribute('y1',gy.toFixed(1));g.setAttribute('y2',gy.toFixed(1));gt.setAttribute('y',(gy+4).toFixed(1));gt.textContent=o.label.split(' ')[0].toLowerCase()+' null';
+    document.getElementById('s-lift').textContent=v.lift;var pp=v.p.split(', '),pb=document.getElementById('s-p');pb.firstChild.nodeValue=pp[0];document.getElementById('s-pq').textContent=pp.length>1?', '+pp.slice(1).join(', '):'';document.getElementById('s-n').textContent=v.n+' pairs';
+    document.getElementById('s-ctl').textContent=v.label+' ('+v.note+')';
+    document.getElementById('chart-desc').textContent=v.spike+' of '+v.n+' spike tokens had a roster hit, versus '+v['null']+' of '+v.n+' '+v.label.toLowerCase()+' null tokens. Lift '+v.lift+', p = '+v.p+'.';
+    var bs=document.querySelectorAll('.toggle button');for(var i=0;i<bs.length;i++)bs[i].setAttribute('aria-pressed',bs[i].getAttribute('data-k')===k?'true':'false');}
+  var bs=document.querySelectorAll('.toggle button');for(var i=0;i<bs.length;i++)bs[i].addEventListener('click',function(){show(this.getAttribute('data-k'));});
+})();
+</script>
+</body></html>

@@ -1,4 +1,4 @@
-"""CLI: python -m prelude <snapshot|diff|classify|score|receipt|demo|backtest*|replay-stub>"""
+"""CLI: python -m prelude <snapshot|diff|classify|score|receipt|demo|backtest*|site|replay-stub>"""
 import json
 import sys
 
@@ -128,6 +128,22 @@ def main(argv=None):
                               "concentration_leave_out_top2_posthoc": conc,
                               "probe_hypothesis": probe}, indent=2))
             print(path)
+    elif cmd == "site":
+        # static results page for GitHub Pages: reads ONLY the committed public results; no key, no API calls
+        import os, subprocess
+        from . import site
+        site.build()
+        scanner = os.environ.get("PRELUDE_LEAK_SCAN",
+                                 os.path.expanduser("~/remi-intelligence/scripts/prelude_leak_scan.py"))
+        if os.path.exists(scanner):
+            r = subprocess.run([scanner, "dir", os.path.dirname(site.OUT)], capture_output=True, text=True)
+            print(r.stdout.strip() or r.stderr.strip())
+            if r.returncode != 0:
+                os.remove(site.OUT)
+                raise SystemExit("site: leak scan failed on docs/ — page removed")
+        else:
+            print("site: leak scanner not available here; the pre-commit hook scans the staged page")
+        print(site.OUT)
     elif cmd == "backtest-table":
         # reads the COMMITTED public results: runs on a clean clone, no key
         import os
